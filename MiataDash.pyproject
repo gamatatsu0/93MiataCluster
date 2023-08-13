@@ -1,0 +1,3 @@
+{
+    "files": ["Notes","ui/CarInfo/OilPressure.qml","ui/CarInfo/Speedometer/MilesPerHour.qml","ui/CarInfo/CarInfoWidget.qml","source/gpsModule/gpsModule.py","ui/assets/miataBlackAndWhite.jpg","main.py","ui/assets/greyMiata.png","ui/BottomBar/BottomBar.qml","main.qml","ui/RightDisplay/RightDisplay.qml","ui/CarInfo/RoundProgress.qml","ui/TopBar/TopBar.qml","source/bridge/bridge.py","Logs/coordinates.csv"]
+}
