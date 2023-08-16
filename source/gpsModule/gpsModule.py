@@ -20,7 +20,7 @@ class gpsModule(QtCore.QObject):
 
         try:
             print("Connecting to GPS antenna....")
-            serialConnection = serial.Serial('/dev/ttyACM0', baudrate=9600)
+            serialConnection = serial.Serial('/dev/ttyACM1', baudrate=9600)
 #            serialConnection = serialConnection.readline()
             return serialConnection
 #            self.get_gps_data(gps_connection)

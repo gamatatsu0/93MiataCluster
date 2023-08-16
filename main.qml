@@ -48,12 +48,17 @@ ApplicationWindow {
 
         function onPrintEngineTemperature(coolant){
             oilPressureGauge.coolentTempValue = coolant
+            rightDisplay.engineTemperature = coolant
+
+
         }
         function onPrintOilPressure(oil){
             oilPressureGauge.oilPresureValue = oil
         }
         function onPrintFuelLevel(fuel){
             rightDisplay.fuelLevel = fuel
+
+            rightDisplay.fuelLevelStr = fuel
         }
         function onprintBatteryVoltage(voltage){
             rightDisplay.voltage = voltage
@@ -183,6 +188,7 @@ ApplicationWindow {
             interiorTemperature : "0"
 
             fuelLevel : 0
+            fuelLevelStr: "30"
             averageMPG : "0"
             fuelRange : "0"
 

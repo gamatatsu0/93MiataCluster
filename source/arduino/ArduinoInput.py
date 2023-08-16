@@ -19,7 +19,7 @@ class arduinoModule(QtCore.QObject):
     def start_arduino_connection(self):
         # Starting the arduino serial connection
         try:
-            serialConnection = serial.Serial('/dev/ttyACM1', baudrate=115200)
+            serialConnection = serial.Serial('/dev/ttyACM0', baudrate=115200)
             self.rawData = serialConnection
 
             return serialConnection
