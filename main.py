@@ -160,6 +160,8 @@ class MainWindow(QObject):
         back end by using emit.
         The Beam light is for the brights, the pop-ups will also be on
         momenteraly while they are moving to popped up position.
+        If the regular lights are not on but the high beams are, than the
+        highbeams will not work.
         """
         try:
             beam = bool(self.arduino_data["Beam"])
@@ -168,6 +170,12 @@ class MainWindow(QObject):
             pass
 
     def setBelts(self):
+        """Return the state of the seatbelt light.
+
+        Get data from "Arduino data", get the state of the
+        seatbelt light(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             belts = bool(self.arduino_data["Bealts"])
             self.printBelts.emit(belts)
@@ -175,6 +183,12 @@ class MainWindow(QObject):
             pass
 
     def setBreak(self):
+        """Return the state of the washer break light.
+
+        Get data from "Arduino data", get the state of the
+        break light(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             handBreak = bool(self.arduino_data["Break"])
             self.printBreak.emit(handBreak)
@@ -182,6 +196,13 @@ class MainWindow(QObject):
             pass
 
     def setBattery(self):
+        """Return the state of the battery light.
+
+        Get data from "Arduino data", get the state of the
+        battery(boolean) and connect it to the
+        back end by using emit.
+        The battery light will also come on when the car is crancking.
+        """
        # need to check this on the actual cluster to see of it is an analog value or a bool
         try:
             battery = self.arduino_data["Charge"]
@@ -190,6 +211,12 @@ class MainWindow(QObject):
             pass
 
     def setCheckHeat(self):
+        """Return the state of the overheating light.
+
+        Get data from "Arduino data", get the state of the
+        overheating(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             checkHeat = bool(self.arduino_data["Cheack_Heat"])
             self.printCheckHeat.emit(checkHeat)
@@ -198,9 +225,14 @@ class MainWindow(QObject):
 #
 
     def setTime(self):
+        """Set the current time on the cluster.
+
+        We use Hours - Minutes - Seconds,
+        it is connected to the front end by using the
+        emit method.
+        """
         now = datetime.datetime.now()
         format = now.strftime("%H:%M:%S")
-        print(format)
         self.printTime.emit(format)
 
     def setGauges(self):
