@@ -130,7 +130,8 @@ class MainWindow(QObject):
         except:
             pass
 
-    def setBattery(self): # need to check this on the actual cluster to see of it is an analog value or a bool
+    def setBattery(self):
+       # need to check this on the actual cluster to see of it is an analog value or a bool
         try:
             battery = self.arduino_data["Charge"]
             self.printBattery.emit(battery)

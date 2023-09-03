@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Shapes 1.15
+import QtQuick 2.12
+import QtQuick.Shapes 1.12
 //import QtGraphicalEffects 1.5
 
 Item {

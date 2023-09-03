@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick 2.12
 import "../CarInfo"
 
 
@@ -13,7 +13,7 @@ Rectangle {
 
     // Fuel properties
     property int fuelLevel : 0
-    property string fuelLevelStr: toString(fuelLevel)
+    property string fuelLevelStr: "0"
     property string averageMPG : "0"
     property string fuelRange : "0"
 

@@ -1,0 +1,201 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Bridge",
+                "qualifiedClassName": "Bridge",
+                "object": true,
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ],
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "auto"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "public",
+                        "name": "getRPM",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getMPH",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getMPHorKM",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getAverageSpeed",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getEngineTemperature",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getAmbientTemp",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getCelciusorFarenheit",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getRange",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getMPG",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getTankLevel",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getHighBeam",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getLowBeam",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getPopUps",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getLeftBlinker",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getRightBlinker",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "bool"
+                            }
+                        ],
+                        "returnType": "bool"
+                    }
+                ]
+            }
+        ],
+        "outputRevision": 68,
+        "QML_IMPORT_NAME": "io.qt.textproperties",
+        "QML_IMPORT_MAJOR_VERSION": 1,
+        "QML_IMPORT_MINOR_VERSION": 0,
+        "QT_MODULES": [
+            "QtCore",
+            "QtGui",
+            "QtQml",
+            "QtQuickControls2"
+        ],
+        "inputFile": "/home/i/QTProjects/MiataDash/source/bridge/bridge.py"
+    }
+]

@@ -1,5 +1,9 @@
-import QtQuick 2.15
-import QtQuick.Shapes 1.15
+// Make sure to use the QtQuick 2.12
+// Otherwise there will be issues with with imports and QtQuick.Shapes
+// For shapes we need to make sure we use the version 1.12
+
+import QtQuick.Shapes 1.12
+import QtQuick 2.12
 //import QtGraphicalEffects 1.12
 
 
