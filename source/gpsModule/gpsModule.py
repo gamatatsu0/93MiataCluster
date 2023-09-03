@@ -5,16 +5,27 @@ import csv
 
 
 class gpsModule(QtCore.QObject):
+    """Connect and get information from the GPS module.
+
+    Class is meant to connect and manage GPS data.
+    We get multiple fields of data from the GPS module
+    in the form of GPS sentences.
+    """
     def __init__(self,serialPort):
+        """ Create variable for use of GPS data and serial conn.
+
+        We need to use this properties as global varibles to update
+        the serial connection and the data that comes GPS module.
+        """
         self.serialPort = serialPort
         self.serialConnection =None
         self.gpsData = ""
-
-#        print("gps class init")
-
     def __str__(self):
-        return f"The port '{self.serialPort}' was provided for serial communication with GPS module. Select actions you need to take"
+        """ Print out message about the serial port used.
 
+        Displays message when the class initiates.
+        """
+        return f"The port '{self.serialPort}' was provided for serial communication with GPS module. Select actions you need to take"
     # ...................... Starting the GPS connection ......................
     def start_GPS_connection(self):
         """Start the connection to the gps module.
@@ -24,9 +35,10 @@ class gpsModule(QtCore.QObject):
         """
         try:
             print("Connecting to GPS antenna ....")
+
             serial_connection = serial.Serial('/dev/ttyACM1', baudrate=9600)
             return serial_connection
-        except (RuntimeError):
+        except RuntimeError:
             print("GPS Serial connection error")
     # ...................... Conversions ......................
 
@@ -47,20 +59,22 @@ class gpsModule(QtCore.QObject):
         One knot is 1.68781 Miles.
         print (knots * 2).
         """
-
         return float(knots * 1.68781)
 
     def clean_and_prep_data(self, gps):
-        """Convert data to UTF-8 and separate by comas."""
+        """Convert data to UTF-8 and separate by comas.
+
+        # when at a complete stop the gps reads between 0.0. and 0.04 MPH
+        # adjust to hink it is qithin 0.000
+        """
         try:
             ser_bytes = gps.readline()
             decoded_bytes = ser_bytes.decode("UTF-8")
             return decoded_bytes.split(",")
-        except (RuntimeError):
+        except RuntimeError:
             pass
 
-# when at a complete stop the gps reads between 0.0. and 0.04 MPH
-# adjust to hink it is qithin 0.000
+
 
     # ...................... Getting Data ......................
     def get_speed(self, gps_data):
@@ -74,12 +88,12 @@ class gpsModule(QtCore.QObject):
             if gps_data[0] == "$GPRMC" or gps_data[0] == "$GPVTG":
                 if gps_data[0] == "$GPRMC":
                     speed_data_kilometers = float(gps_data[7])
-                    return '{0:.2f}'.format(speed_data_kilometers *1.151 )
+                    return '{0:.2f}'.format(speed_data_kilometers *1.151)
 
                 if gps_data[0] == "$GPVTG":
                     speed_data_kilometers = float(gps_data[5])
                     return '{0:.2f}'.format(speed_data_kilometers * 1.151)
-        except (RuntimeError):
+        except RuntimeError:
             pass
 
     def get_altitude(self, gps_gpgga_data):
@@ -93,23 +107,21 @@ class gpsModule(QtCore.QObject):
 
         try:
             alt_data_meters = float(gps_gpgga_data[9])
-#            print("Altitude: {}".format(self.meter_to_feet(alt_data_meters)))
             return alt_data_meters
-        except (RuntimeError):
-            alt_data_meters = "0"
+        except RuntimeError:
+            alt_data_meters = 0
             return alt_data_meters
 
-    def get_latitude(self,gps_GPRMC_data):
-        """ Gets lattitude information from GPS module.
+    def get_latitude(self, gps_gprmc_data):
+        """ Get lattitude information from GPS module.
 
         From the gps module get lattitude information.
         Its must be a float since thats how global coordinated work.
         """
-
-        latitude_nmea = gps_GPRMC_data[3]
+        latitude_nmea = gps_gprmc_data[3]
         latitude_degrees = latitude_nmea[:2]
         try:
-            if gps_GPRMC_data[4] == "S":
+            if gps_gprmc_data[4] == "S":
                 # If we are going south we use the negative
                 latitude_degrees = float(latitude_degrees) * -1
             else:
@@ -121,21 +133,21 @@ class gpsModule(QtCore.QObject):
             latitude_nnm = str(latitude_nnm).strip("0.")[:8]
             latitude = "{}.{}".format(latitude_degrees, latitude_nnm)
             return float(latitude)
-        except:
+        except RuntimeError:
             pass
 
 
-    def get_longitude(self, gps_GPRMC_data):
+    def get_longitude(self, gps_gprmc_data):
         """ Gets longitude information from GPS module.
 
         From the gps module get longitude information.
         Its must be a float since thats how global coordinated work.
         """
         try:
-            longitude_nmea = gps_GPRMC_data[5]
+            longitude_nmea = gps_gprmc_data[5]
             longitude_degrees = longitude_nmea[1:3]
             try:
-                if gps_GPRMC_data[6] == "N":
+                if gps_gprmc_data[6] == "N":
                     longitude_degrees = float(longitude_degrees) * -1
                 else:
                     longitude_degrees = float(longitude_degrees)
@@ -146,9 +158,9 @@ class gpsModule(QtCore.QObject):
                 longitude_mmm = str(longitude_mmm).strip("0.")[:8]
                 longitude = "{}.{}".format(longitude_degrees, longitude_mmm)
                 return longitude
-            except (RuntimeError):
+            except RuntimeError:
                 pass
-        except (RuntimeError):
+        except RuntimeError:
             pass
 
     def store_gps_data(self, latitude, longitude, fileName):
@@ -163,9 +175,13 @@ class gpsModule(QtCore.QObject):
 
             with open(fileName, 'w', newline='\n') as csvfile:
                 fieldnames = ['longitude', 'latitude']
-                writer = csv.writer(csvfile, delimiter=delimiter, quoting=csv.QUOTE_NONE, quotechar='',  lineterminator='\n')
+                writer = csv.writer(csvfile,
+                delimiter=delimiter,
+                quoting=csv.QUOTE_NONE,
+                quotechar='',
+                lineterminator='\n')
 #                writer.writeheader()
 
                 writer.writerow({'longitude': longitude, 'latitude': latitude})
-        except (RuntimeWarning):
-            "error"
+        except RuntimeWarning:
+            print("error")

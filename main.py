@@ -1,4 +1,4 @@
-# This Python file uses the following encoding: utf-8
+﻿# This Python file uses the following encoding: utf-8
 import sys
 import os
 import datetime
@@ -13,6 +13,7 @@ from PySide2.QtCore import QObject, Slot, Signal, QTimer
 
 
 class MainWindow(QObject):
+
     def __init__(self):
         QObject.__init__(self)
         self.speed = "0"
@@ -69,7 +70,7 @@ class MainWindow(QObject):
         try:
             turnLeft = bool(self.arduino_data["Turn_Left"])
             self.printTurnLeft.emit(turnLeft)
-        except:
+        except RuntimeError:
             pass
 
     def setTurnRight(self):
@@ -82,7 +83,7 @@ class MainWindow(QObject):
         try:
             turnRight = bool(self.arduino_data["Turn_Right"])
             self.printTurnRight.emit(turnRight)
-        except:
+        except RuntimeError:
             pass
 
     def setHold(self):
@@ -95,7 +96,7 @@ class MainWindow(QObject):
         try:
             hold = bool(self.arduino_data["Hold"])
             self.printHold.emit(hold)
-        except:
+        except RuntimeError:
             pass
 
     def setAirBag(self):
@@ -108,7 +109,7 @@ class MainWindow(QObject):
         try:
             airBag = bool(self.arduino_data["Air_Bag"])
             self.printAirBag.emit(airBag)
-        except:
+        except RuntimeError:
             pass
 
     def setRetract(self):
@@ -123,7 +124,7 @@ class MainWindow(QObject):
 
             retract = bool(self.arduino_data["Retract"])
             self.printRetract.emit(retract)
-        except:
+        except RuntimeError:
             pass
 
     def setABS(self):
@@ -136,7 +137,7 @@ class MainWindow(QObject):
         try:
             ABS = bool(self.arduino_data["ABS"])
             self.printABS.emit(ABS)
-        except:
+        except RuntimeError:
             pass
 
     def setWasher(self):
@@ -149,7 +150,7 @@ class MainWindow(QObject):
         try:
             washer = bool(self.arduino_data["Washer"])
             self.printWasher.emit(washer)
-        except:
+        except RuntimeError:
             pass
 
     def setBeam(self):
@@ -166,7 +167,7 @@ class MainWindow(QObject):
         try:
             beam = bool(self.arduino_data["Beam"])
             self.printBeam.emit(beam)
-        except:
+        except RuntimeError:
             pass
 
     def setBelts(self):
@@ -179,7 +180,7 @@ class MainWindow(QObject):
         try:
             belts = bool(self.arduino_data["Bealts"])
             self.printBelts.emit(belts)
-        except:
+        except RuntimeError:
             pass
 
     def setBreak(self):
@@ -192,7 +193,7 @@ class MainWindow(QObject):
         try:
             handBreak = bool(self.arduino_data["Break"])
             self.printBreak.emit(handBreak)
-        except:
+        except RuntimeError:
             pass
 
     def setBattery(self):
@@ -207,7 +208,7 @@ class MainWindow(QObject):
         try:
             battery = self.arduino_data["Charge"]
             self.printBattery.emit(battery)
-        except:
+        except RuntimeError:
             pass
 
     def setCheckHeat(self):
@@ -220,7 +221,7 @@ class MainWindow(QObject):
         try:
             checkHeat = bool(self.arduino_data["Cheack_Heat"])
             self.printCheckHeat.emit(checkHeat)
-        except:
+        except RuntimeError:
             pass
 #
 
@@ -236,11 +237,26 @@ class MainWindow(QObject):
         self.printTime.emit(format)
 
     def setGauges(self):
-        new_arduino_data = arduinoModule.read_from_arduino_connection(
-            self.arduinoConnection, self.arduinoConnection)
-        if type(new_arduino_data) is dict:
-            self.arduino_data = new_arduino_data
-            print(new_arduino_data)
+        """Set the values for the gauges.
+
+        Call the functions that pull the multiple data fields from
+        the arduino.
+        The fields being pulled update
+        (RPM, Fuel, Oil Pressure, Battery Voltage)
+        """
+        try:
+            new_arduino_data = arduinoModule.read_from_arduino_connection(
+                self.arduinoConnection, self.arduinoConnection)
+            try:
+                if isinstance(new_arduino_data, dict):
+                    self.arduino_data = new_arduino_data
+                    print(new_arduino_data)
+
+            except RuntimeError:
+                self.arduino_data = []
+        except RuntimeError:
+            pass
+
         self.setRPM()
         self.setTemperature()
         self.setFuelLevel()
@@ -248,6 +264,13 @@ class MainWindow(QObject):
         self.setBatteryVolate()
 
     def setLights(self):
+        """Refresh multiple lights at the sametime.
+
+        Function calls the other function to update multiple warning lights.
+        I used this so i didn't have to make and call seperate functions.
+        The function is called multiple times persecond, so I don't think it
+        would make a difference.
+        """
         self.setTurnLeft()
         self.setTurnRight()
         self.setHold()
@@ -262,51 +285,115 @@ class MainWindow(QObject):
         self.setCheckHeat()
 
     def setMPH(self):
-        gpsData = gpsModule.clean_and_prep_data(
-            self.gpsConnection, self.gpsConnection)
-        gpsSpeed = str(gpsModule.get_speed(self.gpsConnection, gpsData))
-        latitude = gpsModule.get_latitude(self.gpsConnection, gpsData)
-        longitude = gpsModule.get_longitude(self.gpsConnection, gpsData)
-        gpsModule.store_gps_data(
-            self.gpsConnection, latitude, longitude, self.coordinatesFile)
+        """Set the current time on the cluster.
+
+        We use Hours - Minutes - Seconds,
+        it is connected to the front end by using the
+        emit method.
+        *
+        Also updating the the information derived from the GPS
+        at the sae time as the clock since the PGS data is a little slow
+        to propagate due to multiple GPS sentances. (ABout once per second)
+        """
+        try:
+            gpsData = gpsModule.clean_and_prep_data(
+                self.gpsConnection, self.gpsConnection)
+        except RuntimeError:
+            pass
+
+        try:
+            gpsSpeed = str(gpsModule.get_speed(self.gpsConnection, gpsData))
+        except RuntimeError:
+            pass
+
+        try:
+            latitude = gpsModule.get_latitude(self.gpsConnection, gpsData)
+        except RuntimeError:
+            pass
+
+        try:
+            longitude = gpsModule.get_longitude(self.gpsConnection, gpsData)
+        except RuntimeError:
+            pass
+
+        try:
+            gpsModule.store_gps_data(self.gpsConnection, latitude, longitude, self.coordinatesFile)
+        except RuntimeError:
+            pass
 
         if gpsSpeed != "None":
             self.speed = gpsSpeed
         self.printMPH.emit(self.speed)
 
     def setRPM(self):
+        """Set the the value of the RPM.
+
+        Get data from "Arduino data", get the value of the
+        signal form the Tackometer(Float) and connect it to the
+        front end by using emit.
+        There may be some noise in the tachometer reading since cars
+        are natural noisy systems.
+        *
+        The Tachometer reading comes from the coil pack when each
+        sparkplug fires.
+        The signal that the arduino receives is a quarewave.
+        """
         try:
             rpm = str(self.arduino_data["Tack"])
             self.printRPM.emit(rpm)
-        except:
+        except RuntimeError:
             pass
 
     def setTemperature(self):
+        """Return the value of the temperature sensors.
+
+        Get data from "Arduino data", get the state of the
+        temperature sensor(float) located by the thermostat
+        and connect it to the front end by using emit.
+        """
         try:
             temperature = str(self.arduino_data['Temp'])
             self.printEngineTemperature.emit(temperature)
-        except:
+        except RuntimeError:
             pass
 
     def setOilPressure(self):
+        """Return the value of the oil pressure sensor.
+
+        Get data from "Arduino data", get the value of the
+        oil pressure sensor(float) and connect it to
+        the front end by using emit.
+        """
         try:
             oilPressure = str(self.arduino_data['Oil_Temp'])
             self.printOilPressure.emit(oilPressure)
-        except:
+        except RuntimeError:
             pass
 
     def setFuelLevel(self):
+        """Return the value of the fuel level.
+
+        Get data from "Arduino data", get the value of the
+        the fuel level indicator (float) and connect it to
+        the front end by using emit.
+        """
         try:
             FuelLevel = (self.arduino_data['Fuel'])
             self.printFuelLevel.emit(FuelLevel)
-        except:
+        except RuntimeError:
             pass
 
     def setBatteryVolate(self):
+        """Return the value of the battery voltage level.
+
+        Get data from "Arduino data", get the value of the
+        the battery voltage level (float) and connect it to
+        the front end by using emit.
+        """
         try:
             batteryVolatage = (self.arduino_data['Charge'])
             self.printBatteryVoltage.emit(batteryVolatage)
-        except:
+        except RuntimeError:
             pass
 
 
