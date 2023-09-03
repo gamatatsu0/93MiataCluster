@@ -60,6 +60,12 @@ class MainWindow(QObject):
     printCheckHeat = Signal(str)
 
     def setTurnLeft(self):
+        """Return the state of the left turn signal.
+
+        Get data from "Arduino data", get the state of the
+        left turn signal(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             turnLeft = bool(self.arduino_data["Turn_Left"])
             self.printTurnLeft.emit(turnLeft)
@@ -67,6 +73,12 @@ class MainWindow(QObject):
             pass
 
     def setTurnRight(self):
+        """Return the state of the right turn signal.
+
+        Get data from "Arduino data", get the state of the
+        right turn signal(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             turnRight = bool(self.arduino_data["Turn_Right"])
             self.printTurnRight.emit(turnRight)
@@ -74,6 +86,12 @@ class MainWindow(QObject):
             pass
 
     def setHold(self):
+        """Return the state of the hold light.
+
+        Get data from "Arduino data", get the state of the
+        hold light(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             hold = bool(self.arduino_data["Hold"])
             self.printHold.emit(hold)
@@ -81,6 +99,12 @@ class MainWindow(QObject):
             pass
 
     def setAirBag(self):
+        """Return the state of the airbag light.
+
+        Get data from "Arduino data", get the state of the
+        airbag light(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             airBag = bool(self.arduino_data["Air_Bag"])
             self.printAirBag.emit(airBag)
@@ -88,6 +112,13 @@ class MainWindow(QObject):
             pass
 
     def setRetract(self):
+        """Return the state of the retract light.
+
+        Get data from "Arduino data", get the state of the
+        retract light(boolean) and connect it to the
+        back end by using emit.
+        The retract light is for the pop-up lights.
+        """
         try:
 
             retract = bool(self.arduino_data["Retract"])
@@ -96,6 +127,12 @@ class MainWindow(QObject):
             pass
 
     def setABS(self):
+        """Return the state of the ABS light.
+
+        Get data from "Arduino data", get the state of the
+        ABS light(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             ABS = bool(self.arduino_data["ABS"])
             self.printABS.emit(ABS)
@@ -103,6 +140,12 @@ class MainWindow(QObject):
             pass
 
     def setWasher(self):
+        """Return the state of the washer fluid light.
+
+        Get data from "Arduino data", get the state of the
+        washer fluid light(boolean) and connect it to the
+        back end by using emit.
+        """
         try:
             washer = bool(self.arduino_data["Washer"])
             self.printWasher.emit(washer)
@@ -110,6 +153,14 @@ class MainWindow(QObject):
             pass
 
     def setBeam(self):
+        """Return the state of the beam light.
+
+        Get data from "Arduino data", get the state of the
+        beam light(boolean) and connect it to the
+        back end by using emit.
+        The Beam light is for the brights, the pop-ups will also be on
+        momenteraly while they are moving to popped up position.
+        """
         try:
             beam = bool(self.arduino_data["Beam"])
             self.printBeam.emit(beam)
