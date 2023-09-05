@@ -53,7 +53,13 @@ class Bridge(QObject):
         return "100"
 
     @Slot(bool, result=str)
-    def getCelciusorFarenheit(self,celsius):
+    def getCelciusorFarenheit(self,celsius = False):
+        """Variable being passed is a boolean.
+
+        If the variable is true the temperature
+        will be in Celcius, otherwise it will Fahreheit.
+        By default it will be false.
+        """
         #True for Celcius
         if celsius is True:
             return "C"
