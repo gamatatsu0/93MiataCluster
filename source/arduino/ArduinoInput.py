@@ -18,6 +18,7 @@ class arduinoModule(QtCore.QObject):
 
     def start_arduino_connection(self):
         """ Initiate serial connection with Arduino.
+
         This method initiates a serial connection to the arduino
         connected.
         **Cinnection**
@@ -27,19 +28,25 @@ class arduinoModule(QtCore.QObject):
         Return a serial connection.
         Does not update any global variables.
         """
-        # Starting the arduino serial connection
         try:
             serialConnection = serial.Serial('/dev/ttyACM0', baudrate=115200)
             self.rawData = serialConnection
 
             return serialConnection
         #            serialConnection.reset_input_buffer()
-        except:
+        except RuntimeError:
             print("Arduino Serial Connection error")
 
 
 
     def read_from_arduino_connection(self,arduino):
+        """ Read data from the arduino.
+
+        Function takes in a serial connection as input,
+        and it will return a dictionary with the data from Arduino.
+        Errors will be raised an error if we have trouble converting the
+        data from JSON or converting it into a dictionary.
+        """
         try:
             decotedData = arduino.readline().decode('utf-8')
 
@@ -50,10 +57,10 @@ class arduinoModule(QtCore.QObject):
 #                    print(type(arduinoDataDict))
                     return arduinoDataDict
 
-            except:
+            except RuntimeError:
                 print("Error convering to json")
                 pass
-        except:
+        except RuntimeError:
             print("Error reading line from serial connection")
             pass
 
@@ -61,22 +68,22 @@ class arduinoModule(QtCore.QObject):
         try:
             print(self.jsonData["Tack"])
             return self.jsonData["Tack"]
-        except:
+        except RuntimeError:
             pass
     def get_fuel(self):
         try:
             return self.jsonData["Fuel"]
-        except:
+        except RuntimeError:
             pass
 
     def get_temp(self):
         try:
             return self.jsonData["Temp"]
-        except:
+        except RuntimeError:
             pass
 
     def get_batteru(self):
         try:
             return self.jsonData["Charge"]
-        except:
+        except RuntimeError:
             pass
