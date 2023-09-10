@@ -18,6 +18,7 @@ class ArduinoModule(QtCore.QObject):
 
     def __init__(self):
         """Initiate values to use late."""
+        super().__init__()
         self.raw_data = ''
         self.json_data = {}
         self.last_fuel = None
