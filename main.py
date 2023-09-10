@@ -5,7 +5,7 @@ import datetime
 
 
 from source.gpsModule.gpsModule import gpsModule
-from source.arduino.ArduinoInput import arduinoModule
+from source.arduino.ArduinoInput import ArduinoModule
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
@@ -20,7 +20,7 @@ class MainWindow(QObject):
         self.arduino_data = {}
         self.coordinatesFile = "./Logs/coordinates.csv"
         self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
-        self.arduinoConnection = arduinoModule(
+        self.arduinoConnection = ArduinoModule(
             "/dev/ttyACM1").start_arduino_connection()
 
 
@@ -245,7 +245,7 @@ class MainWindow(QObject):
         (RPM, Fuel, Oil Pressure, Battery Voltage)
         """
         try:
-            new_arduino_data = arduinoModule.read_from_arduino_connection(
+            new_arduino_data = ArduinoModule.read_from_arduino_connection(
                 self.arduinoConnection, self.arduinoConnection)
             try:
                 if isinstance(new_arduino_data, dict):
