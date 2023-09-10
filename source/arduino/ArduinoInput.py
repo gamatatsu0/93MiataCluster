@@ -8,14 +8,23 @@ from PySide6 import QtCore
 
 
 class ArduinoModule(QtCore.QObject):
+    """Class is for connecting, retrieving and prepping data.
+
+    This class makes a serial connection to arduino, gets data
+    from a string, in json and returns a dictionary which is
+    used to retrieve indivual keys storing different data values
+    partaining to the auge cluster.
+    """
+
     def __init__(self):
-        self.raw_data = {}
-        self.json_data = ''
+        """Initiate values to use late."""
+        self.raw_data = ''
+        self.json_data = {}
         self.last_fuel = None
         self.last_temp = None
 
     def __str__(self):
-        """ Return basic information about the class.
+        """Return basic information about the class.
 
         Return basic explanation of what the function does.
         """
@@ -67,7 +76,7 @@ class ArduinoModule(QtCore.QObject):
         except RuntimeError:
             print("Error reading line from serial connection")
 
-    def get_rpm(self, arduino_dict):
+    def get_rpm(self):
         """Get the RPM value.
 
         Function takes in    a dictionary as input,
@@ -75,11 +84,11 @@ class ArduinoModule(QtCore.QObject):
         the dictionary.
         """
         try:
-            return self.json_data["Tack"]
+            return self.json_data.get('Tack')
         except RuntimeError:
             pass
 
-    def get_fuel(self, arduino_dict):
+    def get_fuel(self):
         """Get the fuel value.
 
         Function takes in a dictionary as input.
@@ -95,7 +104,7 @@ class ArduinoModule(QtCore.QObject):
         finally:
             self.last_fuel = fuel
 
-    def get_temp(self, arduino_dict):
+    def get_temp(self):
         """Get the temperature value.
 
         Function takes in a dictionary as input.
@@ -111,7 +120,7 @@ class ArduinoModule(QtCore.QObject):
         finally:
             self.last_temp = temp
 
-    def get_battery(self, arduino_dict):
+    def get_battery(self):
         """Get the battery level value.
 
         Function takes in a dictionary as input.
