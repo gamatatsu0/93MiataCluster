@@ -1,4 +1,4 @@
-﻿# This Python file uses the following encoding: utf-8
+# This Python file uses the following encoding: utf-8
 import sys
 import os
 import datetime
@@ -201,7 +201,7 @@ class MainWindow(QObject):
 
         Get data from "Arduino data", get the state of the
         battery(boolean) and connect it to the
-        back end by using emit.
+        back end by using emit. need to add something 
         The battery light will also come on when the car is crancking.
         """
        # need to check this on the actual cluster to see of it is an analog value or a bool
