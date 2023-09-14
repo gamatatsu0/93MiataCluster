@@ -97,7 +97,11 @@ import QtQuick.Controls 2.12
                     color:"white"}
 
                 Text{
-                    text: carInfo.fuelRange + " Miles"
+                    function get_avg_range(gas){
+                        var gallons_left = gas*13
+                        return gallons_left
+                    }
+                    text: get_avg_range(carInfo.fuelRange) + " Miles"
                     color:"white"}
                     }
         }
