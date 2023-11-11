@@ -45,7 +45,7 @@ class ArduinoModule(QtCore.QObject):
         Does not update any global variables.
         """
         try:
-            serial_connection = serial.Serial('/dev/ttyACM0', baudrate=115200)
+            serial_connection = serial.Serial('/dev/ttyACM1',115200, timeout=1)
             self.raw_data = serial_connection
 
             return serial_connection
@@ -63,6 +63,7 @@ class ArduinoModule(QtCore.QObject):
         """
         try:
             decoted_data = arduino.readline().decode('utf-8')
+#            print(decoted_data)
 
             try:
                 arduino_data_dict = json.loads(decoted_data)

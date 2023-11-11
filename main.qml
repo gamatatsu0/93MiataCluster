@@ -1,5 +1,6 @@
-import QtQuick 2.2
-import QtQuick.Window 2.2
+// Copyright (C) 2021 The Qt Company Ltd.
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial
+
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.11
@@ -7,110 +8,24 @@ import QtQuick.Controls 2.1
 import QtQuick.Window 2.1
 import QtQuick.Controls.Material 2.1
 
-
-// Importing other eleents
+import io.qt.textproperties 1.0
 import 'ui/BottomBar'
 import 'ui/TopBar'
 import 'ui/RightDisplay'
 import 'ui/CarInfo'
 
-
-
-// NOTES
-// Try to pass data from python through the bridge
-// From the bridge we can pass the data to each one of the elements
-// From the elements we need to make that the value that is being changes has been declared @ in the Item
-
-
-
 ApplicationWindow {
-    id:page
-    visible: true;
+    id: page
     width: 1920;
-
     height: 720;
-    property string color1 : "#444444";
-    property string color2 : "#171717";
-    property string color3 : "#DA0037";
-    property string color4 : "#EDEDED";
+    visible: true
+    Material.theme: Material.Dark
+    Material.accent: Material.Red
 
-    color:page.color2;
+   Bridge {
+        id: bridge
+    }
 
-
-    // The bridge is used to connect to the Python Backend
-    // The functions in here calls the variable in the different elements that need to be changed
-    Connections {
-        target: backend
-
-        function onPrintTime(time){
-            centerGauge.kmhOrMPH = time
-        }
-
-        function onPrintMPH(time){
-            centerGauge.speedValue = time
-        }
-
-        function onPrintRPM(rpm){
-            centerGauge.rpmValue = rpm
-        }
-
-        function onPrintEngineTemperature(coolant){
-            oilPressureGauge.coolentTempValue = coolant
-            rightDisplay.engineTemperature = coolant
-        }
-        function onPrintOilPressure(oil){
-            oilPressureGauge.oilPresureValue = oil
-        }
-        function onPrintFuelLevel(fuel){
-            rightDisplay.fuelLevel = fuel
-
-            rightDisplay.fuelLevelStr = fuel
-        }
-        function onprintBatteryVoltage(voltage){
-            rightDisplay.voltage = voltage
-        }
-        // For the simple lights
-        function onPrintTurnLeft(light){
-            topBar.leftTurnSignal = light
-        }
-        function onPrintTurnRight(light){
-            topBar.rightTurnSignal = light
-        }
-        function onPrintHold(light){}
-
-        function onPrintAirBag(light){
-            bottombar.airBagLights = light
-        }
-        function onPrintRetract(light){
-            topBar.popUp = light
-        }
-        function onPrintABS(light){
-
-        }
-        function onPrintWasher(light){
-            bottombar.washerLightss = light
-        }
-
-        function onPrintBeam(light){
-            topBar.brights = light
-        }
-        function onPrintBelts(light){
-            bottombar.seatBeltLights = light
-        }
-        function onPrintBreak(light){
-            bottombar.breaksLights = light
-        }
-        function onPrintBattery(light){
-            bottombar.batteryLight = light
-        }
-        function onPrintCheckHeat(light){
-            bottombar.checkEngineLights = light
-        }
-        //        function onPrintCheckEngine(light){}
-        //        function onPrintCheckEngine(light){}
-        //        function onPrintCheckEngine(light){}
-        //        function onPrintCheckEngine(light){}
-            }
 
 
         Image {
@@ -156,32 +71,35 @@ ApplicationWindow {
             OilPressure{
                 id: oilPressureGauge
                 value: 5000
-                oilPresureValue: "80"
-                coolentTempValue: "30"
+                oilPresureValue: 10
+                oilPresureValueText: bridge.setOilPressure(1)
+
+                coolentTempValue: bridge.setTemperature(1)
+                coolentTempValueText: bridge.setTemperature(1)
             }
         }
 
         TopBar{
             id:topBar
-            leftTurnSignal: false
-            rightTurnSignal:false
-            popUp: false
-            brights:false
-            runningLights:false
-            hazardLights:false
+            leftTurnSignal: bridge.setTurnLeft(1)
+            rightTurnSignal:bridge.setTurnRight(1)
+            popUp: bridge.setRetract(1)
+            brights:bridge.setBeam(1)
+            runningLights:bridge.setHold(1)
+            hazardLights:bridge.setHazard(1)
         }
 
         BottomBar{
             id:bottombar
 
-            ambientTemperature : "0"
-            seatBeltLights: false
-            gasLights: false
-            breaksLights: false
-            airBagLights: false
-            oilLights: false
-            washerLightss: false
-            checkEngineLights: false
+            ambientTemperature : bridge.setAmbientTemperature(1)
+            seatBeltLights: bridge.setBelts(1)
+            gasLights: bridge.setFuelLight(1)
+            breaksLights: bridge.setBreak(1)
+            airBagLights: bridge.setAirBag(1)
+            oilLights: bridge.setOil(1)
+            washerLightss: bridge.setWasher(1)
+            checkEngineLights: bridge.setCheckHeat(1)
 
 
         }
@@ -189,25 +107,22 @@ ApplicationWindow {
         RightDisplay{
             id:rightDisplay
 
-            engineTemperature : "0"
-            ambientTemperature : "0"
-            interiorTemperature : "0"
+            engineTemperature : bridge.setTemperature(1)
+            ambientTemperature : bridge.setAmbientTemperature(1)
+            interiorTemperature : bridge.setInteriorTemperature(1)
 
-            fuelLevel : 0
-            fuelLevelStr: "30"
-            averageMPG : "0"
-            fuelRange : "0"
+            fuelLevel : bridge.setFuelLevel(1)
+            fuelLevelStr: bridge.setFuelLevel(1)
+            averageMPG : bridge.setAverageMPG(1)
+            fuelRange : bridge.setFuelRange(1)
 
-            voltage : 0
+            voltage : bridge.setBatteryVoltage(1)
 
-            averageSpeed : "0"
+            averageSpeed : bridge.setAverageSpeed(1)
 
         }
-    }
 
-    /*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+
+
+    }
 
