@@ -25,9 +25,17 @@ import 'ui/CarInfo'
 
 ApplicationWindow {
     id:page
-    visible: true
+    visible: true;
     width: 1920;
-    height: 720
+
+    height: 720;
+    property string color1 : "#444444";
+    property string color2 : "#171717";
+    property string color3 : "#DA0037";
+    property string color4 : "#EDEDED";
+
+    color:page.color2;
+
 
     // The bridge is used to connect to the Python Backend
     // The functions in here calls the variable in the different elements that need to be changed
@@ -49,8 +57,6 @@ ApplicationWindow {
         function onPrintEngineTemperature(coolant){
             oilPressureGauge.coolentTempValue = coolant
             rightDisplay.engineTemperature = coolant
-
-
         }
         function onPrintOilPressure(oil){
             oilPressureGauge.oilPresureValue = oil
