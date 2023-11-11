@@ -7,7 +7,7 @@
 #include <QtQml/qqml.h>
 #include <QtQml/qqmlmoduleregistration.h>
 
-#include </home/kali/Documents/Projects/93MiataCluster/source/bridge/bridge.py>
+#include </home/kali/Documents/Projects/93MiataCluster/main.py>
 
 
 #if !defined(QT_STATIC)

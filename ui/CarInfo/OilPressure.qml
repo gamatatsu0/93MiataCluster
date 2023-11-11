@@ -8,10 +8,12 @@ Item {
     width: 400;
     height: 400;
 
-
+//    Values being passed
     property real value: 5000
-    property string oilPresureValue: "0"
-    property string coolentTempValue: "0"
+    property int oilPresureValue: 0
+    property int coolentTempValue: 0
+    property string oilPresureValueText: "0"
+    property string coolentTempValueText: "0"
 
 //    Properties General
     property bool roundCap: false
@@ -35,23 +37,16 @@ Item {
     property int textSize: 20
     property color textColor: "#7c7c7c"
 
-
-
-
-
-
     Shape{
         id:shape
         anchors.fill: parent
         layer.enabled: true
         layer.samples: progress.samples
 
-
         ShapePath{
             id: pathBG
-            strokeColor: "transparent"
+            strokeColor: progress.bgStrokeColor
             fillColor: progress.bgColor
-
             strokeWidth: progress.strokeBgWidth
             capStyle: progress.roundCap ? ShapePath.RoundCap : ShapePath.FlatCap
 
@@ -70,11 +65,8 @@ Item {
         ShapePath{
             id: path
             strokeColor: progress.progressColor
-
             fillColor: "transparent"
-
             strokeWidth: progress.progressWidth
-
             capStyle: progress.roundCap ? ShapePath.RoundCap : ShapePath.FlatCap
 
             PathAngleArc{
@@ -83,9 +75,8 @@ Item {
                 centerX: (progress.width /2) - 10
                 centerY: progress.height /2.2
                 startAngle: progress.startAngle
-                sweepAngle: (180 / progress.maxValue * progress.value)
+                sweepAngle: (180 / 100 * progress.oilPresureValueText)
             }
-
         }
 
         Text {
@@ -113,7 +104,7 @@ Item {
             font.family: progress.textFontFamily
 
         }
-
+// Collent Temp
         Text {
             id: coolantTemp
 
@@ -126,10 +117,6 @@ Item {
             font.family: progress.textFontFamily
 
         }
-
-
-
-
         ShapePath{
             id: leftBG
             strokeColor: "red"
@@ -144,11 +131,9 @@ Item {
                 centerY: progress.height /2.2
                 startAngle: progress.startAngleLeft
                 sweepAngle: 180
-
             }
         }
-
-
+        // Coolent
         ShapePath{
             id: lefts
             strokeColor: progress.bgStrokeColor
@@ -162,7 +147,7 @@ Item {
                 centerX: (progress.width / 2) + 10
                 centerY: (progress.height / 2.2)
                 startAngle: progress.startAngleLeft
-                sweepAngle: (180 / progress.maxValue * progress.value)
+                sweepAngle: (180 / 150 * progress.coolentTempValueText)
 
             }
         }

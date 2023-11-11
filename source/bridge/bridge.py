@@ -46,11 +46,11 @@ class Bridge(QObject):
     # tempretature
     @Slot(str, result=str)
     def getEngineTemperature(self,s):
-        return "98"
+        return s
 
     @Slot(str, result=str)
     def getAmbientTemp(self,s):
-        return "100"
+        return s
 
     @Slot(bool, result=str)
     def getCelciusorFarenheit(self,celsius = False):
@@ -69,15 +69,15 @@ class Bridge(QObject):
     # Fuel
     @Slot(str, result=str)
     def getRange(self,s):
-        return "300"
+        return s
 
     @Slot(str, result=str)
     def getMPG(self,s):
-        return "28"
+        return s
 
     @Slot(str, result=str)
     def getTankLevel(self,s):
-        return "90"
+        return str(s)
 
     # Lights
     @Slot(bool, result=bool)
@@ -86,7 +86,7 @@ class Bridge(QObject):
 
     @Slot(bool, result=bool)
     def getLowBeam(self,s):
-        return True
+        return s
 
     @Slot(bool, result=bool)
     def getPopUps(self,s):

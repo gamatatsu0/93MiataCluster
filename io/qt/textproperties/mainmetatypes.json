@@ -20,7 +20,7 @@
                 "slots": [
                     {
                         "access": "public",
-                        "name": "getRPM",
+                        "name": "setTurnLeft",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -31,7 +31,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getMPH",
+                        "name": "setTurnRight",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -42,18 +42,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getMPHorKM",
-                        "arguments": [
-                            {
-                                "name": "a1",
-                                "type": "bool"
-                            }
-                        ],
-                        "returnType": "QString"
-                    },
-                    {
-                        "access": "public",
-                        "name": "getAverageSpeed",
+                        "name": "setHold",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -64,7 +53,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getEngineTemperature",
+                        "name": "setAirBag",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -75,7 +64,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getAmbientTemp",
+                        "name": "setHazard",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -86,18 +75,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getCelciusorFarenheit",
-                        "arguments": [
-                            {
-                                "name": "a1",
-                                "type": "bool"
-                            }
-                        ],
-                        "returnType": "QString"
-                    },
-                    {
-                        "access": "public",
-                        "name": "getRange",
+                        "name": "setRetract",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -108,7 +86,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getMPG",
+                        "name": "setABS",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -119,7 +97,7 @@
                     },
                     {
                         "access": "public",
-                        "name": "getTankLevel",
+                        "name": "setWasher",
                         "arguments": [
                             {
                                 "name": "a1",
@@ -130,58 +108,135 @@
                     },
                     {
                         "access": "public",
-                        "name": "getHighBeam",
+                        "name": "setBeam",
                         "arguments": [
                             {
                                 "name": "a1",
-                                "type": "bool"
+                                "type": "QString"
                             }
                         ],
-                        "returnType": "bool"
+                        "returnType": "QString"
                     },
                     {
                         "access": "public",
-                        "name": "getLowBeam",
+                        "name": "setBelts",
                         "arguments": [
                             {
                                 "name": "a1",
-                                "type": "bool"
+                                "type": "QString"
                             }
                         ],
-                        "returnType": "bool"
+                        "returnType": "QString"
                     },
                     {
                         "access": "public",
-                        "name": "getPopUps",
+                        "name": "setBreak",
                         "arguments": [
                             {
                                 "name": "a1",
-                                "type": "bool"
+                                "type": "QString"
                             }
                         ],
-                        "returnType": "bool"
+                        "returnType": "QString"
                     },
                     {
                         "access": "public",
-                        "name": "getLeftBlinker",
+                        "name": "setBattery",
                         "arguments": [
                             {
                                 "name": "a1",
-                                "type": "bool"
+                                "type": "QString"
                             }
                         ],
-                        "returnType": "bool"
+                        "returnType": "QString"
                     },
                     {
                         "access": "public",
-                        "name": "getRightBlinker",
+                        "name": "setCheckHeat",
                         "arguments": [
                             {
                                 "name": "a1",
-                                "type": "bool"
+                                "type": "QString"
                             }
                         ],
-                        "returnType": "bool"
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setTime",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setMPH",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setRPM",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setTemperature",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setFuelLevel",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setBatteryVolate",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "setOilPressure",
+                        "arguments": [
+                            {
+                                "name": "a1",
+                                "type": "QString"
+                            }
+                        ],
+                        "returnType": "QString"
                     }
                 ]
             }
@@ -196,6 +251,6 @@
             "QtQml",
             "QtQuickControls2"
         ],
-        "inputFile": "/home/kali/Documents/Projects/93MiataCluster/source/bridge/bridge.py"
+        "inputFile": "/home/kali/Documents/Projects/93MiataCluster/main.py"
     }
 ]

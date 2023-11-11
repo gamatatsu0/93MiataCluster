@@ -1,2 +1,3 @@
 module io.qt.textproperties
+typeinfo main.qmltypes
 typeinfo bridge.qmltypes
