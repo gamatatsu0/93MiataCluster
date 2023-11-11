@@ -19,9 +19,8 @@ class MainWindow(QObject):
         self.speed = "0"
         self.arduino_data = {}
         self.coordinatesFile = "./Logs/coordinates.csv"
-        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
-        self.arduinoConnection = ArduinoModule(
-            "/dev/ttyACM1").start_arduino_connection()
+#        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
+        self.arduinoConnection = ArduinoModule().start_arduino_connection()
 
 
 #       Timer calls the defs that are part of thi class

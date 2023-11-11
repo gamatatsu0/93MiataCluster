@@ -49,8 +49,9 @@ Item {
 
         ShapePath{
             id: pathBG
-            strokeColor: progress.bgStrokeColor
+            strokeColor: "transparent"
             fillColor: progress.bgColor
+
             strokeWidth: progress.strokeBgWidth
             capStyle: progress.roundCap ? ShapePath.RoundCap : ShapePath.FlatCap
 
@@ -69,8 +70,11 @@ Item {
         ShapePath{
             id: path
             strokeColor: progress.progressColor
+
             fillColor: "transparent"
+
             strokeWidth: progress.progressWidth
+
             capStyle: progress.roundCap ? ShapePath.RoundCap : ShapePath.FlatCap
 
             PathAngleArc{
@@ -80,8 +84,8 @@ Item {
                 centerY: progress.height /2.2
                 startAngle: progress.startAngle
                 sweepAngle: (180 / progress.maxValue * progress.value)
-
             }
+
         }
 
         Text {
