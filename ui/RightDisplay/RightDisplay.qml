@@ -13,15 +13,14 @@ Rectangle {
 
     // Fuel properties
     property int fuelLevel : 0
-    property string fuelLevelStr: "0"
-    property string averageMPG : "0"
-    property string fuelRange : "0"
+    property int averageMPG : 0
+    property int fuelRange : 0
 
     // Battery properties
     property int voltage: 0
 
     // Speed properties
-    property string averageSpeed: "0"
+    property int averageSpeed: 0
 
     anchors{
 

@@ -67,6 +67,7 @@ class FuelEfficiency():
     As input it will need to call function from the GPS. """
     def setTripMiles(self, miles):
         self.tripMiles = miles
-        
+    
+    # ........................ conversions ........................
     def convertPercentToGallons(self, percent):
         return percent * 7.692
