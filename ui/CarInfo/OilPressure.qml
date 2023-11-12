@@ -93,7 +93,7 @@ Item {
 
         Text {
             id: oilPreaaure
-            text: progress.oilPresureValue + "PSI"
+            text: progress.oilPresureValueText  + "PSI"
 
             anchors.verticalCenter: parent.verticalCenter
             x: 40
