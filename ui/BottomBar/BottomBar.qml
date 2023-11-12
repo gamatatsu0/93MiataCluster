@@ -25,7 +25,7 @@ Rectangle{
     property bool checkEngineLights:true
     property bool batteryLight: false
 
-    property string  ambientTemperature : "0" + " F"
+    property int  ambientTemperature : 0
 
 
 

@@ -44,7 +44,7 @@ class Bridge(QObject):
             print("It failed")
             pass
         
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setTurnLeft(self,s):
         print(s)
         # self.setGauges("s")
@@ -61,7 +61,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setTurnRight(self,s):
         # self.setGauges("s")
         """Return the state of the right turn signal.
@@ -77,7 +77,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setHold(self,s):        
         # self.setGauges("s")
         """Return the state of the hold light.
@@ -93,7 +93,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setAirBag(self,s):
         # self.setGauges("s")
         """Return the state of the airbag light.
@@ -109,7 +109,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setHazard(self,s):
         # self.setGauges("s")
         """Return the state of the airbag light.
@@ -125,7 +125,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setRetract(self,s):
         # self.setGauges("s")
         """Return the state of the retract light.
@@ -142,7 +142,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setABS(self,s):
         # self.setGauges("s")
         """Return the state of the ABS light.
@@ -158,7 +158,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setWasher(self,s):
         # self.setGauges("s")
         """Return the state of the washer fluid light.
@@ -174,7 +174,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setBeam(self,s):
         # self.setGauges("s")
         """Return the state of the beam light.
@@ -194,7 +194,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setBelts(self,s):
         # self.setGauges("s")
         """Return the state of the seatbelt light.
@@ -210,7 +210,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setBreak(self,s):
         # self.setGauges("s")
         """Return the state of the washer break light.
@@ -226,7 +226,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setBattery(self,s):
         # self.setGauges("s")
         """Return the state of the battery light.
@@ -244,7 +244,7 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setCheckHeat(self,s):
         # self.setGauges("s")
         """Return the state of the overheating light.
@@ -364,7 +364,7 @@ class Bridge(QObject):
         """
         FuelLevel = int(self.arduino_data['Fuel'])
         gallons = self.fuelEffient.convertPercentToGallons(FuelLevel)
-        self.fuelEffient.SetCurrentGallons(gallons)
+        self.fuelEffient.setCurrentGallons(gallons)
         return FuelLevel
 #        print(FuelLevel)
 
@@ -407,7 +407,7 @@ class Bridge(QObject):
 
 
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setOilLight(self,s):
         # self.setGauges("s")
         return "10"
@@ -421,38 +421,38 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=bool)
     def setFuelLight(self,s):
         # self.setGauges("s")
         return True
     
 # ============== For stuff that needs to be calculated ==============
-    @Slot(str, result=str)
+    @Slot(str, result=int)
     def setAmbientTemperature(self,s):
         # self.setGauges("s")
         return "69"
     
-    @Slot(str, result=str)
+    @Slot(int, result=int)
     def setAverageSpeed(self,s):
         # self.setGauges("s")
         return "69"
             
-    @Slot(str, result=str)
+    @Slot(str, result=int)
     def setBatteryVoltage(self,s):
         # self.setGauges("s")
         return "69"
             
-    @Slot(str, result=str)
+    @Slot(str, result=int)
     def setFuelRange(self,s):
-        self.fuelEffient.get
-        return "69"
+        return self.fuelEffient.getMilesTilEmpty()
+        
     
-    @Slot(str, result=str)
+    @Slot(str, result=int)
     def setAverageMPG(self,s):
         # self.setGauges("s")
         return "69"
            
-    @Slot(str, result=str)
+    @Slot(str, result=int)
     def setInteriorTemperature(self,s):
         # self.setGauges("s")
         return "69"

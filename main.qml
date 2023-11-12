@@ -93,22 +93,71 @@ ApplicationWindow {
             hazardLights:bridge.setHazard("11")
         }
 
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.ambientTemperature = bridge.setAmbientTemperature("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.seatBeltLights = bridge.setBelts("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.gasLights = bridge.setFuelLight("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.breaksLights = bridge.setBreak("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.airBagLights = bridge.setAirBag("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.oilLights = bridge.setOilLight("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.washerLightss = bridge.setWasher("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true; triggeredOnStart:true;
+            onTriggered: bottombar.checkEngineLights = bridge.setCheckHeat("11")
+        }
+
         BottomBar{
             id:bottombar
 
-            ambientTemperature : bridge.setAmbientTemperature("11")
-            seatBeltLights: bridge.setBelts("11")
-            gasLights: bridge.setFuelLight("11")
-            breaksLights: bridge.setBreak("11")
-            airBagLights: bridge.setAirBag("11")
-            oilLights: bridge.setOilLight("11")
-            washerLightss: bridge.setWasher("11")
-            checkEngineLights: bridge.setCheckHeat("11")
+            ambientTemperature : 0
+            seatBeltLights: false
+            gasLights: false
+            breaksLights: false
+            airBagLights: false
+            oilLights: fasle
+            washerLightss: false
+            checkEngineLights: false
         }
 
         Timer{
             interval: 500; running:true; repeat:true
             onTriggered: rightDisplay.fuelLevel = bridge.setFuelLevel("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true
+            onTriggered: rightDisplay.averageMPG = bridge.setAverageMPG("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true
+            onTriggered: rightDisplay.fuelRange = bridge.setFuelRange("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true
+            onTriggered: rightDisplay.voltage = bridge.setBatteryVoltage("11")
+        }
+        Timer{
+            interval: 500; running:true; repeat:true
+            onTriggered: rightDisplay.averageSpeed = bridge.setAverageSpeed("11")
         }
         RightDisplay{
             id:rightDisplay
@@ -118,9 +167,9 @@ ApplicationWindow {
             interiorTemperature : bridge.setInteriorTemperature("11")
 
             fuelLevel : 0
-            averageMPG : bridge.setAverageMPG("11")
-            fuelRange : bridge.setFuelRange("11")
-            voltage : bridge.setBatteryVoltage("11")
-            averageSpeed : bridge.setAverageSpeed()
+            averageMPG : 0
+            fuelRange : 0
+            voltage : 0
+            averageSpeed : 0
         }
     }
