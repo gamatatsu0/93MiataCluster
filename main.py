@@ -3,6 +3,7 @@
 
 import sys
 from pathlib import Path
+import datetime
 
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
@@ -11,7 +12,7 @@ from PySide6.QtQuickControls2 import QQuickStyle
 
 from source.gpsModule.gpsModule import gpsModule
 from source.arduino.ArduinoInput import ArduinoModule
-import datetime
+from source.helpers.Milage import FuelEfficiency
 
 # To be used on the @QmlElement decorator
 # (QML_IMPORT_MINOR_VERSION is optional)
@@ -28,6 +29,8 @@ class Bridge(QObject):
            self.coordinatesFile = "./Logs/coordinates.csv"
    #        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
            self.arduinoConnection = ArduinoModule().start_arduino_connection()
+           self.fuelEffient = FuelEfficiency()
+           
            
     @Slot(str, result=str)
     def setGauges(self,s):
@@ -44,7 +47,7 @@ class Bridge(QObject):
     @Slot(str, result=str)
     def setTurnLeft(self,s):
         print(s)
-
+        # self.setGauges("s")
         """Return the state of the left turn signal.
 
           Get data from "Arduino data", get the state of the
@@ -60,6 +63,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setTurnRight(self,s):
+        # self.setGauges("s")
         """Return the state of the right turn signal.
 
           Get data from "Arduino data", get the state of the
@@ -74,7 +78,8 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=str)
-    def setHold(self,s):
+    def setHold(self,s):        
+        # self.setGauges("s")
         """Return the state of the hold light.
 
           Get data from "Arduino data", get the state of the
@@ -90,6 +95,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setAirBag(self,s):
+        # self.setGauges("s")
         """Return the state of the airbag light.
 
             Get data from "Arduino data", get the state of the
@@ -105,6 +111,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setHazard(self,s):
+        # self.setGauges("s")
         """Return the state of the airbag light.
 
     Get data from "Arduino data", get the state of the
@@ -120,6 +127,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setRetract(self,s):
+        # self.setGauges("s")
         """Return the state of the retract light.
 
           Get data from "Arduino data", get the state of the
@@ -136,6 +144,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setABS(self,s):
+        # self.setGauges("s")
         """Return the state of the ABS light.
 
           Get data from "Arduino data", get the state of the
@@ -151,6 +160,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setWasher(self,s):
+        # self.setGauges("s")
         """Return the state of the washer fluid light.
 
           Get data from "Arduino data", get the state of the
@@ -166,6 +176,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setBeam(self,s):
+        # self.setGauges("s")
         """Return the state of the beam light.
 
           Get data from "Arduino data", get the state of the
@@ -185,6 +196,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setBelts(self,s):
+        # self.setGauges("s")
         """Return the state of the seatbelt light.
 
           Get data from "Arduino data", get the state of the
@@ -200,6 +212,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setBreak(self,s):
+        # self.setGauges("s")
         """Return the state of the washer break light.
 
           Get data from "Arduino data", get the state of the
@@ -215,6 +228,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setBattery(self,s):
+        # self.setGauges("s")
         """Return the state of the battery light.
 
           Get data from "Arduino data", get the state of the
@@ -232,6 +246,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setCheckHeat(self,s):
+        # self.setGauges("s")
         """Return the state of the overheating light.
 
           Get data from "Arduino data", get the state of the
@@ -247,6 +262,7 @@ class Bridge(QObject):
   #
     @Slot(str, result=str)
     def setTime(self,s):
+        # self.setGauges("s")
         """Set the current time on the cluster.
 
           We use Hours - Minutes - Seconds,
@@ -259,6 +275,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setMPH(self,s):
+        # self.setGauges("s")
         """Set the current time on the cluster.
 
         We use Hours - Minutes - Seconds,
@@ -300,6 +317,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setRPM(self,s):
+        # self.setGauges("s")
         """Set the the value of the RPM.
 
         Get data from "Arduino data", get the value of the
@@ -321,34 +339,38 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setTemperature(self,s):
+        # self.setGauges("s")
         """Return the value of the temperature sensors.
 
         Get data from "Arduino data", get the state of the
         temperature sensor(float) located by the thermostat
         and connect it to the front end by using emit.
         """
-        return "50"
-#        try:
-#            temperature = str(self.arduino_data['Temp'])
-#            self.printEngineTemperature.emit(temperature)
-#        except RuntimeError:
-#            pass
+        try:
+            temperature = str(self.arduino_data['Temp'])
+            return temperature
+       
+        except RuntimeError:
+            pass
 
-    @Slot(str, result=str)
+    @Slot(str, result=int)
     def setFuelLevel(self,s):
+        # self.setGauges("s")
         """Return the value of the fuel level.
 
         Get data from "Arduino data", get the value of the
         the fuel level indicator (float) and connect it to
         the front end by using emit.
         """
-        FuelLevel = (self.arduino_data['Fuel'])
-        print(FuelLevel)
+        FuelLevel = int(self.arduino_data['Fuel'])
+        gallons = self.fuelEffient.convertPercentToGallons(FuelLevel)
+        self.fuelEffient.SetCurrentGallons(gallons)
         return FuelLevel
 #        print(FuelLevel)
 
     @Slot(str, result=str)
     def setBatteryVolate(self,s):
+        # self.setGauges("s")
         """Return the value of the battery voltage level.
 
         Get data from "Arduino data", get the value of the
@@ -361,7 +383,6 @@ class Bridge(QObject):
         except RuntimeError:
             pass
 
-        @Slot(str, result=bool)
         def getUnderline(self, s):
             if s.lower() == "underline":
                 return True
@@ -370,14 +391,14 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setOilPressure(self,s):
-        print("SSS")
+        # self.setGauges("s")
+        # print("SSS")
         """Return the value of the oil pressure sensor.
 
             Get data from "Arduino data", get the value of the
             oil pressure sensor(float) and connect it to
             the front end by using emit.
-            """
-        
+            """ 
         try:
             oilPressure = str(self.arduino_data['Oil_psi'])
             return oilPressure
@@ -388,7 +409,7 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setOilLight(self,s):
-        
+        # self.setGauges("s")
         return "10"
 
         try:
@@ -402,32 +423,39 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setFuelLight(self,s):
+        # self.setGauges("s")
         return True
     
 # ============== For stuff that needs to be calculated ==============
     @Slot(str, result=str)
     def setAmbientTemperature(self,s):
+        # self.setGauges("s")
         return "69"
     
     @Slot(str, result=str)
     def setAverageSpeed(self,s):
+        # self.setGauges("s")
         return "69"
             
     @Slot(str, result=str)
     def setBatteryVoltage(self,s):
+        # self.setGauges("s")
         return "69"
             
     @Slot(str, result=str)
     def setFuelRange(self,s):
+        self.fuelEffient.get
         return "69"
     
     @Slot(str, result=str)
     def setAverageMPG(self,s):
-         return "69"
+        # self.setGauges("s")
+        return "69"
            
     @Slot(str, result=str)
     def setInteriorTemperature(self,s):
-         return "69"
+        # self.setGauges("s")
+        return "69"
            
 #    @Slot(str, result=str)
 #    def setAmbientTemperature(self,s):

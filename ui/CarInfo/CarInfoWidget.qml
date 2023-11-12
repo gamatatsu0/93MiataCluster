@@ -142,13 +142,13 @@ import QtQuick.Controls 2.12
 
                         Text{
                             id:fuelText
-                        text: "     Fuel"
+                        text: " "
                         color:"white"}
 
 
                         Text{
                             id:fuelTextValue
-                        text: carInfo.fuelLevelStr
+                        text: "    "+carInfo.fuelLevel + "%"
                         color:"white"}
 
                         ProgressBar {
