@@ -14,6 +14,11 @@ Module {
         exports: ["io.qt.textproperties/Bridge 1.0"]
         exportMetaObjectRevisions: [256]
         Method {
+            name: "setGauges"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
             name: "setTurnLeft"
             type: "QString"
             Parameter { name: "a1"; type: "QString" }
@@ -110,6 +115,46 @@ Module {
         }
         Method {
             name: "setOilPressure"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setOilLight"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setFuelLight"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setAmbientTemperature"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setAverageSpeed"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setBatteryVoltage"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setFuelRange"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setAverageMPG"
+            type: "QString"
+            Parameter { name: "a1"; type: "QString" }
+        }
+        Method {
+            name: "setInteriorTemperature"
             type: "QString"
             Parameter { name: "a1"; type: "QString" }
         }

@@ -28,9 +28,23 @@ class Bridge(QObject):
            self.coordinatesFile = "./Logs/coordinates.csv"
    #        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
            self.arduinoConnection = ArduinoModule().start_arduino_connection()
-
+           
+    @Slot(str, result=str)
+    def setGauges(self,s):
+        try:
+            new_arduino_data = ArduinoModule.read_from_arduino_connection(
+                self.arduinoConnection, self.arduinoConnection)
+            if type(new_arduino_data) is dict:
+                self.arduino_data = new_arduino_data
+                print(new_arduino_data)
+        except:
+            print("It failed")
+            pass
+        
     @Slot(str, result=str)
     def setTurnLeft(self,s):
+        print(s)
+
         """Return the state of the left turn signal.
 
           Get data from "Arduino data", get the state of the
@@ -39,7 +53,8 @@ class Bridge(QObject):
         """
         try:
             turnLeft = bool(self.arduino_data['Turn_Left'])
-            self.printTurnLeft.emit(turnLeft)
+            return turnLeft
+
         except RuntimeError:
             pass
 
@@ -53,7 +68,8 @@ class Bridge(QObject):
         """
         try:
             turnRight = bool(self.arduino_data['Turn_Right'])
-            self.printTurnRight.emit(turnRight)
+            return turnRight
+
         except RuntimeError:
             pass
 
@@ -67,7 +83,8 @@ class Bridge(QObject):
         """
         try:
             hold = bool(self.arduino_data['Hold'])
-            self.printHold.emit(hold)
+            return hold
+
         except RuntimeError:
             pass
 
@@ -81,7 +98,8 @@ class Bridge(QObject):
         """
         try:
             airBag = bool(self.arduino_data['Air_Bag'])
-            self.printAirBag.emit(airBag)
+            return airBag
+
         except RuntimeError:
             pass
 
@@ -95,7 +113,8 @@ class Bridge(QObject):
     """
         try:
             airBag = bool(self.arduino_data['Air_Bag'])
-            self.printAirBag.emit(airBag)
+            return airBag
+
         except RuntimeError:
             pass
 
@@ -109,9 +128,9 @@ class Bridge(QObject):
           The retract light is for the pop-up lights.
         """
         try:
-
             retract = bool(self.arduino_data['Retract'])
-            self.printRetract.emit(retract)
+            return retract
+
         except RuntimeError:
             pass
 
@@ -125,7 +144,8 @@ class Bridge(QObject):
         """
         try:
             ABS = bool(self.arduino_data['ABS'])
-            self.printABS.emit(ABS)
+            return ABS
+
         except RuntimeError:
             pass
 
@@ -139,7 +159,8 @@ class Bridge(QObject):
         """
         try:
             washer = bool(self.arduino_data['Washer'])
-            self.printWasher.emit(washer)
+            return washer
+
         except RuntimeError:
             pass
 
@@ -157,7 +178,8 @@ class Bridge(QObject):
         """
         try:
             beam = bool(self.arduino_data['Beam'])
-            self.printBeam.emit(beam)
+            return beam
+
         except RuntimeError:
             pass
 
@@ -171,7 +193,8 @@ class Bridge(QObject):
           """
         try:
             belts = bool(self.arduino_data['Bealts'])
-            self.printBelts.emit(belts)
+            return belts
+
         except RuntimeError:
             pass
 
@@ -185,7 +208,8 @@ class Bridge(QObject):
           """
         try:
             handBreak = bool(self.arduino_data['Break'])
-            self.printBreak.emit(handBreak)
+            return handBreak
+
         except RuntimeError:
             pass
 
@@ -201,7 +225,8 @@ class Bridge(QObject):
          # need to check this on the actual cluster to see of it is an analog value or a bool
         try:
             battery = self.arduino_data['Charge']
-            self.printBattery.emit(battery)
+            return battery
+
         except RuntimeError:
             pass
 
@@ -214,8 +239,9 @@ class Bridge(QObject):
           back end by using emit.
           """
         try:
-            checkHeat = bool(self.arduino_data["Cheack_Heat"])
-            self.printCheckHeat.emit(checkHeat)
+            checkHeat = bool(self.arduino_data["Check_Heat"])
+            return checkHeat
+
         except RuntimeError:
             pass
   #
@@ -228,8 +254,8 @@ class Bridge(QObject):
           emit method.
           """
         now = datetime.datetime.now()
-        format = now.strftime("%H:%M:%S")
-        self.printTime.emit(format)
+        formated = now.strftime("%H:%M:%S")
+        return formated
 
     @Slot(str, result=str)
     def setMPH(self,s):
@@ -271,7 +297,6 @@ class Bridge(QObject):
 
         if gpsSpeed != "None":
             self.speed = gpsSpeed
-        self.printMPH.emit(self.speed)
 
     @Slot(str, result=str)
     def setRPM(self,s):
@@ -289,7 +314,8 @@ class Bridge(QObject):
         """
         try:
             rpm = str(self.arduino_data['Tack'])
-            self.printRPM.emit(rpm)
+            return rpm
+
         except RuntimeError:
             pass
 
@@ -310,17 +336,16 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setFuelLevel(self,s):
-        print(s)
         """Return the value of the fuel level.
 
         Get data from "Arduino data", get the value of the
         the fuel level indicator (float) and connect it to
         the front end by using emit.
         """
-
         FuelLevel = (self.arduino_data['Fuel'])
+        print(FuelLevel)
+        return FuelLevel
 #        print(FuelLevel)
-        self.printFuelLevel.emit(FuelLevel)
 
     @Slot(str, result=str)
     def setBatteryVolate(self,s):
@@ -331,8 +356,8 @@ class Bridge(QObject):
         the front end by using emit.
         """
         try:
-            batteryVolatage = (self.arduino_data['Charge'])
-            self.printBatteryVoltage.emit(batteryVolatage)
+            return (self.arduino_data['Charge'])
+
         except RuntimeError:
             pass
 
@@ -345,21 +370,69 @@ class Bridge(QObject):
 
     @Slot(str, result=str)
     def setOilPressure(self,s):
-        print("coolent:")
-        return "10"
+        print("SSS")
         """Return the value of the oil pressure sensor.
 
             Get data from "Arduino data", get the value of the
             oil pressure sensor(float) and connect it to
             the front end by using emit.
             """
-#        try:
-#            oilPressure = str(self.arduino_data['Oil_Temp'])
-#            self.printOilPressure.emit(oilPressure)
-#        except RuntimeError:
-#            pass
+        
+        try:
+            oilPressure = str(self.arduino_data['Oil_psi'])
+            return oilPressure
+        except RuntimeError:
+           pass
 
 
+
+    @Slot(str, result=str)
+    def setOilLight(self,s):
+        
+        return "10"
+
+        try:
+            oilPressure = str(self.arduino_data['Oil_Temp'])
+            if oilPressure > "95":
+                return True
+            else:
+                False
+        except RuntimeError:
+            pass
+
+    @Slot(str, result=str)
+    def setFuelLight(self,s):
+        return True
+    
+# ============== For stuff that needs to be calculated ==============
+    @Slot(str, result=str)
+    def setAmbientTemperature(self,s):
+        return "69"
+    
+    @Slot(str, result=str)
+    def setAverageSpeed(self,s):
+        return "69"
+            
+    @Slot(str, result=str)
+    def setBatteryVoltage(self,s):
+        return "69"
+            
+    @Slot(str, result=str)
+    def setFuelRange(self,s):
+        return "69"
+    
+    @Slot(str, result=str)
+    def setAverageMPG(self,s):
+         return "69"
+           
+    @Slot(str, result=str)
+    def setInteriorTemperature(self,s):
+         return "69"
+           
+#    @Slot(str, result=str)
+#    def setAmbientTemperature(self,s):
+#        return "69"
+    
 if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
     QQuickStyle.setStyle("Material")

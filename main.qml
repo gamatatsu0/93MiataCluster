@@ -26,16 +26,16 @@ ApplicationWindow {
         id: bridge
     }
 
-
-
+   Timer{
+       interval: 500; running:true; repeat:true
+       onTriggered: bridge.setGauges("s");
+   }
         Image {
             id: image2
             anchors.fill: parent
             opacity: .6
             z: -1
         }
-
-
         Rectangle{
             id:roundHolder
             x: (parent.width /2) - (roundHolder.width /2)
@@ -52,7 +52,6 @@ ApplicationWindow {
                 speedValue:"0" // Pass value for the crrent speed
                 kmhOrMPH:"MPH" // TODO
                 celOrFarheit:"C" // TODO
-
             }
         }
 
@@ -60,69 +59,57 @@ ApplicationWindow {
             id:oilPressureHolder
             x: (parent.width /2.5) - (roundHolder.width )
             y: (parent.height /1.8) - (roundHolder.height / 2)
-
             color:"transparent"
-
             width: 500
             height:500
-
-
 
             OilPressure{
                 id: oilPressureGauge
                 value: 5000
                 oilPresureValue: 10
-                oilPresureValueText: bridge.setOilPressure(1)
+                oilPresureValueText: bridge.setOilPressure("11")
 
-                coolentTempValue: bridge.setTemperature(1)
-                coolentTempValueText: bridge.setTemperature(1)
+                coolentTempValue: bridge.setTemperature("11")
+                coolentTempValueText: bridge.setTemperature("11")
             }
         }
 
         TopBar{
             id:topBar
-            leftTurnSignal: bridge.setTurnLeft(1)
-            rightTurnSignal:bridge.setTurnRight(1)
-            popUp: bridge.setRetract(1)
-            brights:bridge.setBeam(1)
-            runningLights:bridge.setHold(1)
-            hazardLights:bridge.setHazard(1)
+            dateTimeString: bridge.setTime("11")
+            leftTurnSignal: bridge.setTurnLeft("11")
+            rightTurnSignal:bridge.setTurnRight("11")
+            popUp: bridge.setRetract("11")
+            brights:bridge.setBeam("11")
+            runningLights:bridge.setHold("11")
+            hazardLights:bridge.setHazard("11")
         }
 
         BottomBar{
             id:bottombar
 
-            ambientTemperature : bridge.setAmbientTemperature(1)
-            seatBeltLights: bridge.setBelts(1)
-            gasLights: bridge.setFuelLight(1)
-            breaksLights: bridge.setBreak(1)
-            airBagLights: bridge.setAirBag(1)
-            oilLights: bridge.setOil(1)
-            washerLightss: bridge.setWasher(1)
-            checkEngineLights: bridge.setCheckHeat(1)
-
-
+            ambientTemperature : bridge.setAmbientTemperature("11")
+            seatBeltLights: bridge.setBelts("11")
+            gasLights: bridge.setFuelLight("11")
+            breaksLights: bridge.setBreak("11")
+            airBagLights: bridge.setAirBag("11")
+            oilLights: bridge.setOilLight("11")
+            washerLightss: bridge.setWasher("11")
+            checkEngineLights: bridge.setCheckHeat("11")
         }
 
         RightDisplay{
             id:rightDisplay
 
-            engineTemperature : bridge.setTemperature(1)
-            ambientTemperature : bridge.setAmbientTemperature(1)
-            interiorTemperature : bridge.setInteriorTemperature(1)
+            engineTemperature : bridge.setTemperature("11")
+            ambientTemperature : bridge.setAmbientTemperature("11")
+            interiorTemperature : bridge.setInteriorTemperature("11")
 
-            fuelLevel : bridge.setFuelLevel(1)
-            fuelLevelStr: bridge.setFuelLevel(1)
-            averageMPG : bridge.setAverageMPG(1)
-            fuelRange : bridge.setFuelRange(1)
-
-            voltage : bridge.setBatteryVoltage(1)
-
-            averageSpeed : bridge.setAverageSpeed(1)
-
+            fuelLevel : bridge.setFuelLevel("11")
+            fuelLevelStr: bridge.setFuelLevel("11")
+            averageMPG : bridge.setAverageMPG("11")
+            fuelRange : bridge.setFuelRange("11")
+            voltage : bridge.setBatteryVoltage("11")
+            averageSpeed : bridge.setAverageSpeed()
         }
-
-
-
     }
-
