@@ -57,7 +57,6 @@ Item {
                 centerY: progress.height /2.2
                 startAngle: progress.startAngle
                 sweepAngle: 180
-
             }
         }
 
@@ -108,7 +107,7 @@ Item {
         Text {
             id: coolantTemp
 
-            text: progress.coolentTempValue + " F"
+            text: progress.coolentTempValueText + " F"
 
             anchors.verticalCenter: parent.verticalCenter
             x:  300

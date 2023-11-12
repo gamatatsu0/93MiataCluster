@@ -36,6 +36,7 @@ ApplicationWindow {
             opacity: .6
             z: -1
         }
+
         Rectangle{
             id:roundHolder
             x: (parent.width /2) - (roundHolder.width /2)
@@ -63,14 +64,21 @@ ApplicationWindow {
             width: 500
             height:500
 
+            // Timer for oil pressure
+            Timer{
+                interval: 100; running:true; repeat:true; triggeredOnStart:true;
+                onTriggered: oilPressureGauge.oilPresureValueText = bridge.setOilPressure("11");
+            } // Timer for coolent
+            Timer{
+                interval: 100; running:true; repeat:true; triggeredOnStart:true;
+                onTriggered: oilPressureGauge.coolentTempValueText = bridge.setTemperature("11");
+            }
+
             OilPressure{
                 id: oilPressureGauge
                 value: 5000
-                oilPresureValue: 10
-                oilPresureValueText: bridge.setOilPressure("11")
-
-                coolentTempValue: bridge.setTemperature("11")
-                coolentTempValueText: bridge.setTemperature("11")
+                oilPresureValueText: "0"
+                coolentTempValueText: "0"
             }
         }
 
@@ -98,6 +106,10 @@ ApplicationWindow {
             checkEngineLights: bridge.setCheckHeat("11")
         }
 
+        Timer{
+            interval: 500; running:true; repeat:true
+            onTriggered: rightDisplay.fuelLevel = bridge.setFuelLevel("11")
+        }
         RightDisplay{
             id:rightDisplay
 
@@ -105,8 +117,7 @@ ApplicationWindow {
             ambientTemperature : bridge.setAmbientTemperature("11")
             interiorTemperature : bridge.setInteriorTemperature("11")
 
-            fuelLevel : bridge.setFuelLevel("11")
-            fuelLevelStr: bridge.setFuelLevel("11")
+            fuelLevel : 0
             averageMPG : bridge.setAverageMPG("11")
             fuelRange : bridge.setFuelRange("11")
             voltage : bridge.setBatteryVoltage("11")
