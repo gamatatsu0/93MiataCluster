@@ -77,7 +77,7 @@ Item {
                 sweepAngle: (180 / 100 * progress.oilPresureValueText)
             }
         }
-
+// Middle Text
         Text {
             id: textProgress
 
@@ -89,7 +89,7 @@ Item {
             font.family: progress.textFontFamily
 
         }
-
+// Oil pressure text (PSI)
         Text {
             id: oilPreaaure
             text: progress.oilPresureValueText  + "PSI"
@@ -146,7 +146,7 @@ Item {
                 centerX: (progress.width / 2) + 10
                 centerY: (progress.height / 2.2)
                 startAngle: progress.startAngleLeft
-                sweepAngle: (180 / 150 * progress.coolentTempValueText)
+                sweepAngle: 180- (180 / 250 * progress.coolentTempValueText)
 
             }
         }

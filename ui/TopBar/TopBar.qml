@@ -1,9 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-
-
 Rectangle{
-
     id: topBar
     anchors{
         top:parent.top
@@ -29,36 +26,32 @@ Rectangle{
         id: leftRow
         x: 0
         y: 0
-
         height: 100
-
         anchors{
-        left: parent.left
-       }
+            left: parent.left
+        }
 
-//        turnLeft
+        //        turnLeft
         Image {
             id: leftArrow
             source:leftTurnSignal? "../../ui/assets/cluster images/blueArrowLeft.png" : "../../ui/assets/cluster images/grayArrowLeft.png"
-
-
         }
 
-//        popUp
+        //        popUp
         Image {
             id: pupUp
             source:popUp? "../../ui/assets/cluster images/popUpOn.png" : "../../ui/assets/cluster images/popUpOff.png"
         }
 
 
-//        lights
+        //        lights
         Image {
             id: lights
             source:runningLights? "../../ui/assets/cluster images/lightsOn.png" : "../../ui/assets/cluster images/lightsOff.png"
-                   }
-}
+        }
+    }
 
-// Clock
+    // Clock
     Item{
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -73,8 +66,6 @@ Rectangle{
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
-
-
     Row {
         id: righRow
         x: 0
@@ -82,21 +73,18 @@ Rectangle{
 
         height: 100
         anchors{
-        right: parent.right}
-
-
-
-//          brights
+            right: parent.right}
+        //          brights
         Image {
-             id: brights
-             source:brights ? "../../ui/assets/cluster images/brights.png" : "../../ui/assets/cluster images/lightsOff.png"
-                        }
-//        hazardLights
+            id: brights
+            source:brights ? "../../ui/assets/cluster images/brights.png" : "../../ui/assets/cluster images/lightsOff.png"
+        }
+        //        hazardLights
         Image {
-             id: hazards
-             source:hazardLights? "../../ui/assets/cluster images/hazardOn.png" : "../../ui/assets/cluster images/hazardOff.png"
-                                }
-//        turnRight
+            id: hazards
+            source:hazardLights? "../../ui/assets/cluster images/hazardOn.png" : "../../ui/assets/cluster images/hazardOff.png"
+        }
+        //        turnRight
         Image {
             id: rightArrow
             source:rightTurnSignal? "../../ui/assets/cluster images/blueArrowRight.png" : "../../ui/assets/cluster images/grayArrowRight.png"
