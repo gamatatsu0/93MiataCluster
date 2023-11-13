@@ -23,17 +23,16 @@ QML_IMPORT_MAJOR_VERSION = 1
 @QmlElement
 class Bridge(QObject):
     def __init__(self):
-           QObject.__init__(self)
-           self.speed = "0"
-           self.arduino_data = {}
-           self.coordinatesFile = "./Logs/coordinates.csv"
-   #        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
-           self.arduinoConnection = ArduinoModule().start_arduino_connection()
-           self.fuelEffient = FuelEfficiency()
-           
-           
+        QObject.__init__(self)
+        self.speed = "0"
+        self.arduino_data = {}
+        self.coordinatesFile = "./Logs/coordinates.csv"
+#        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
+        self.arduinoConnection = ArduinoModule().start_arduino_connection()
+        self.fuelEffient = FuelEfficiency()
+
     @Slot(str, result=str)
-    def setGauges(self,s):
+    def setGauges(self, s):
         try:
             new_arduino_data = ArduinoModule.read_from_arduino_connection(
                 self.arduinoConnection, self.arduinoConnection)
@@ -43,9 +42,9 @@ class Bridge(QObject):
         except:
             print("It failed")
             pass
-        
+
     @Slot(str, result=bool)
-    def setTurnLeft(self,s):
+    def setTurnLeft(self, s):
         print(s)
         # self.setGauges("s")
         """Return the state of the left turn signal.
@@ -62,7 +61,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setTurnRight(self,s):
+    def setTurnRight(self, s):
         # self.setGauges("s")
         """Return the state of the right turn signal.
 
@@ -78,7 +77,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setHold(self,s):        
+    def setHold(self, s):
         # self.setGauges("s")
         """Return the state of the hold light.
 
@@ -94,7 +93,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setAirBag(self,s):
+    def setAirBag(self, s):
         # self.setGauges("s")
         """Return the state of the airbag light.
 
@@ -110,7 +109,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setHazard(self,s):
+    def setHazard(self, s):
         # self.setGauges("s")
         """Return the state of the airbag light.
 
@@ -126,7 +125,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setRetract(self,s):
+    def setRetract(self, s):
         # self.setGauges("s")
         """Return the state of the retract light.
 
@@ -143,7 +142,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setABS(self,s):
+    def setABS(self, s):
         # self.setGauges("s")
         """Return the state of the ABS light.
 
@@ -159,7 +158,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setWasher(self,s):
+    def setWasher(self, s):
         # self.setGauges("s")
         """Return the state of the washer fluid light.
 
@@ -175,7 +174,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setBeam(self,s):
+    def setBeam(self, s):
         # self.setGauges("s")
         """Return the state of the beam light.
 
@@ -195,7 +194,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setBelts(self,s):
+    def setBelts(self, s):
         # self.setGauges("s")
         """Return the state of the seatbelt light.
 
@@ -211,7 +210,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setBreak(self,s):
+    def setBreak(self, s):
         # self.setGauges("s")
         """Return the state of the washer break light.
 
@@ -227,7 +226,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setBattery(self,s):
+    def setBattery(self, s):
         # self.setGauges("s")
         """Return the state of the battery light.
 
@@ -236,7 +235,7 @@ class Bridge(QObject):
           back end by using emit. need to add something
           The battery light will also come on when the car is crancking.
           """
-         # need to check this on the actual cluster to see of it is an analog value or a bool
+        # need to check this on the actual cluster to see of it is an analog value or a bool
         try:
             battery = self.arduino_data['Charge']
             return battery
@@ -245,7 +244,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setCheckHeat(self,s):
+    def setCheckHeat(self, s):
         # self.setGauges("s")
         """Return the state of the overheating light.
 
@@ -260,8 +259,9 @@ class Bridge(QObject):
         except RuntimeError:
             pass
   #
+
     @Slot(str, result=str)
-    def setTime(self,s):
+    def setTime(self, s):
         # self.setGauges("s")
         """Set the current time on the cluster.
 
@@ -274,7 +274,7 @@ class Bridge(QObject):
         return formated
 
     @Slot(str, result=str)
-    def setMPH(self,s):
+    def setMPH(self, s):
         # self.setGauges("s")
         """Set the current time on the cluster.
 
@@ -308,7 +308,8 @@ class Bridge(QObject):
             pass
 
         try:
-            gpsModule.store_gps_data(self.gpsConnection, latitude, longitude, self.coordinatesFile)
+            gpsModule.store_gps_data(
+                self.gpsConnection, latitude, longitude, self.coordinatesFile)
         except RuntimeError:
             pass
 
@@ -316,7 +317,7 @@ class Bridge(QObject):
             self.speed = gpsSpeed
 
     @Slot(str, result=str)
-    def setRPM(self,s):
+    def setRPM(self, s):
         # self.setGauges("s")
         """Set the the value of the RPM.
 
@@ -338,7 +339,7 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=str)
-    def setTemperature(self,s):
+    def setTemperature(self, s):
         # self.setGauges("s")
         """Return the value of the temperature sensors.
 
@@ -349,12 +350,12 @@ class Bridge(QObject):
         try:
             temperature = str(self.arduino_data['Temp'])
             return temperature
-       
+
         except RuntimeError:
             pass
 
     @Slot(str, result=int)
-    def setFuelLevel(self,s):
+    def setFuelLevel(self, s):
         # self.setGauges("s")
         """Return the value of the fuel level.
 
@@ -369,7 +370,7 @@ class Bridge(QObject):
 #        print(FuelLevel)
 
     @Slot(str, result=str)
-    def setBatteryVolate(self,s):
+    def setBatteryVolate(self, s):
         # self.setGauges("s")
         """Return the value of the battery voltage level.
 
@@ -390,7 +391,7 @@ class Bridge(QObject):
                 return False
 
     @Slot(str, result=str)
-    def setOilPressure(self,s):
+    def setOilPressure(self, s):
         # self.setGauges("s")
         # print("SSS")
         """Return the value of the oil pressure sensor.
@@ -398,22 +399,18 @@ class Bridge(QObject):
             Get data from "Arduino data", get the value of the
             oil pressure sensor(float) and connect it to
             the front end by using emit.
-            """ 
+            """
         try:
             oilPressure = str(self.arduino_data['Oil_psi'])
             return oilPressure
         except RuntimeError:
-           pass
-
-
+            pass
 
     @Slot(str, result=bool)
-    def setOilLight(self,s):
+    def setOilLight(self, s):
         # self.setGauges("s")
-        return "10"
-
         try:
-            oilPressure = str(self.arduino_data['Oil_Temp'])
+            oilPressure = str(self.arduino_data['Oil_psi'])
             if oilPressure > "95":
                 return True
             else:
@@ -422,45 +419,45 @@ class Bridge(QObject):
             pass
 
     @Slot(str, result=bool)
-    def setFuelLight(self,s):
+    def setFuelLight(self, s):
         # self.setGauges("s")
         return True
-    
+
 # ============== For stuff that needs to be calculated ==============
     @Slot(str, result=int)
-    def setAmbientTemperature(self,s):
+    def setAmbientTemperature(self, s):
         # self.setGauges("s")
         return "69"
-    
+
     @Slot(int, result=int)
-    def setAverageSpeed(self,s):
+    def setAverageSpeed(self, s):
         # self.setGauges("s")
         return "69"
-            
+
     @Slot(str, result=int)
-    def setBatteryVoltage(self,s):
+    def setBatteryVoltage(self, s):
         # self.setGauges("s")
         return "69"
-            
+
     @Slot(str, result=int)
-    def setFuelRange(self,s):
+    def setFuelRange(self, s):
         return self.fuelEffient.getMilesTilEmpty()
-        
-    
+
     @Slot(str, result=int)
-    def setAverageMPG(self,s):
+    def setAverageMPG(self, s):
         # self.setGauges("s")
         return "69"
-           
+
     @Slot(str, result=int)
-    def setInteriorTemperature(self,s):
+    def setInteriorTemperature(self, s):
         # self.setGauges("s")
         return "69"
-           
+
 #    @Slot(str, result=str)
 #    def setAmbientTemperature(self,s):
 #        return "69"
-    
+
+
 if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
     QQuickStyle.setStyle("Material")

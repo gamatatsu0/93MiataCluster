@@ -20,67 +20,67 @@ Module {
         }
         Method {
             name: "setTurnLeft"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setTurnRight"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setHold"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setAirBag"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setHazard"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setRetract"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setABS"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setWasher"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setBeam"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setBelts"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setBreak"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setBattery"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setCheckHeat"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
@@ -105,7 +105,7 @@ Module {
         }
         Method {
             name: "setFuelLevel"
-            type: "QString"
+            type: "int"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
@@ -120,42 +120,42 @@ Module {
         }
         Method {
             name: "setOilLight"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setFuelLight"
-            type: "QString"
+            type: "bool"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setAmbientTemperature"
-            type: "QString"
+            type: "int"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setAverageSpeed"
-            type: "QString"
-            Parameter { name: "a1"; type: "QString" }
+            type: "int"
+            Parameter { name: "a1"; type: "int" }
         }
         Method {
             name: "setBatteryVoltage"
-            type: "QString"
+            type: "int"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setFuelRange"
-            type: "QString"
+            type: "int"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setAverageMPG"
-            type: "QString"
+            type: "int"
             Parameter { name: "a1"; type: "QString" }
         }
         Method {
             name: "setInteriorTemperature"
-            type: "QString"
+            type: "int"
             Parameter { name: "a1"; type: "QString" }
         }
     }

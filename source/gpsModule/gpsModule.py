@@ -11,15 +11,17 @@ class gpsModule(QtCore.QObject):
     We get multiple fields of data from the GPS module
     in the form of GPS sentences.
     """
-    def __init__(self,serialPort):
+
+    def __init__(self, serialPort):
         """ Create variable for use of GPS data and serial conn.
 
         We need to use this properties as global varibles to update
         the serial connection and the data that comes GPS module.
         """
         self.serialPort = serialPort
-        self.serialConnection =None
+        self.serialConnection = None
         self.gpsData = ""
+
     def __str__(self):
         """ Print out message about the serial port used.
 
@@ -27,6 +29,7 @@ class gpsModule(QtCore.QObject):
         """
         return f"The port '{self.serialPort}' was provided for serial communication with GPS module. Select actions you need to take"
     # ...................... Starting the GPS connection ......................
+
     def start_GPS_connection(self):
         """Start the connection to the gps module.
 
@@ -74,9 +77,8 @@ class gpsModule(QtCore.QObject):
         except RuntimeError:
             pass
 
-
-
     # ...................... Getting Data ......................
+
     def get_speed(self, gps_data):
         """ Requires GPRMC sentence.
 
@@ -88,7 +90,7 @@ class gpsModule(QtCore.QObject):
             if gps_data[0] == "$GPRMC" or gps_data[0] == "$GPVTG":
                 if gps_data[0] == "$GPRMC":
                     speed_data_kilometers = float(gps_data[7])
-                    return '{0:.2f}'.format(speed_data_kilometers *1.151)
+                    return '{0:.2f}'.format(speed_data_kilometers * 1.151)
 
                 if gps_data[0] == "$GPVTG":
                     speed_data_kilometers = float(gps_data[5])
@@ -136,7 +138,6 @@ class gpsModule(QtCore.QObject):
         except RuntimeError:
             pass
 
-
     def get_longitude(self, gps_gprmc_data):
         """ Gets longitude information from GPS module.
 
@@ -176,10 +177,10 @@ class gpsModule(QtCore.QObject):
             with open(fileName, 'w', newline='\n') as csvfile:
                 fieldnames = ['longitude', 'latitude']
                 writer = csv.writer(csvfile,
-                delimiter=delimiter,
-                quoting=csv.QUOTE_NONE,
-                quotechar='',
-                lineterminator='\n')
+                                    delimiter=delimiter,
+                                    quoting=csv.QUOTE_NONE,
+                                    quotechar='',
+                                    lineterminator='\n')
 #                writer.writeheader()
 
                 writer.writerow({'longitude': longitude, 'latitude': latitude})
