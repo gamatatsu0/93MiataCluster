@@ -17,6 +17,7 @@
         "source/bridge/bridge.py",
         "Logs/coordinates.csv",
         "source/arduino/ArduinoInput.py",
-        "ui/assets/fonts/DS-DIGII.TTF"
+        "ui/assets/fonts/DS-DIGII.TTF",
+        "ui/CarInfo/Graphs.qml"
     ]
 }

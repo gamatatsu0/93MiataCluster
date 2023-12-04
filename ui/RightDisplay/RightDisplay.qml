@@ -23,15 +23,23 @@ Rectangle {
     property int averageSpeed: 0
 
     anchors{
-
-
-    top:parent.top
-    right:parent.right
-    bottom:parent.bottom
+        top:parent.top
+        right:parent.right
+        bottom:parent.bottom
     }
+
     width:parent.width *1/4.5
     color: "transparent"
 
+
+    Graphs{
+        id:graphsWidget
+
+        averageSpeed : rightDisplayMain.averageSpeed
+
+        anchors.top: parent.top
+        anchors.bottom: carInfoWidget.top
+    }
 
     CarInfoWidget{
         id:carInfoWidget
@@ -50,6 +58,9 @@ Rectangle {
         voltage : rightDisplayMain.voltage
         // Speed
         averageSpeed : rightDisplayMain.averageSpeed
+
+        anchors.bottom: parent.bottom
+
     }
 
 }

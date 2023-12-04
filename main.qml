@@ -43,6 +43,7 @@ ApplicationWindow {
         z: -1
     }
 
+// Main Gauge At center of the screen
     Rectangle{
         id:roundHolder
         x: (parent.width /2) - (roundHolder.width /2)
