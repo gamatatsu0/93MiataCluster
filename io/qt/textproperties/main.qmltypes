@@ -7,7 +7,7 @@ import QtQuick.tooling 1.2
 
 Module {
     Component {
-        file: "/home/kali/Documents/Projects/93MiataCluster/main.py"
+        file: "/home/owl/Documents/Projects/93MiataCluster/main.py"
         name: "Bridge"
         accessSemantics: "reference"
         prototype: "QObject"

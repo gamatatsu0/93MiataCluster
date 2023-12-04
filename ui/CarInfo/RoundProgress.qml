@@ -17,7 +17,7 @@ Item {
     width: 550;
     height: 550;
 
-//   General Gauge Properties
+    //   General Gauge Properties
     property bool roundCap: true
     property int startAngle: -210
     property real maxRPMValue: 7000
@@ -27,23 +27,24 @@ Item {
     property string kmhOrMPH : "MPH" // Default is MPH
     property string celOrFarheit: "C" // Default is Celcius
 
-//    Big Circle
+    //    Big Circle
     property color bgColor: "transparent"
     property color bgStrokeColor: "#7e7e7e"
-    property int strokeBgWidth: 40
+    property int strokeBgWidth: 10
 
-//    Progress Circle
+    //    Progress Circle
     property color progressColor: (progress.rpmValue < 6000)? "blue" : "red"
     property color lessColor: "blue"
 
-    property int progressWidth: 40
+    property int progressWidth: 20
 
-//    Text Properties
+    //    Text Properties
     property string text: "%"
     property string textFontFamily: "Segoe UI"
     property int textSize: 35
     property int rpmLabelSize: 30
     property color textColor: "#7c7c7c"
+    property color textRPMColor: "#FF0000"
 
 
 
@@ -52,6 +53,8 @@ Item {
         anchors.fill: parent
         layer.enabled: true
         layer.samples: progress.samples
+
+        FontLoader { id: digitalFont; source: "../../ui/assets/fonts/DS-DIGII.TTF" }
 
 
         ShapePath{
@@ -90,33 +93,35 @@ Item {
 
             }
 
-//            Glow {
-//                anchors.fill: path
-//                radius: 20
-//                samples: 17
-//                color: "red"
-//                source: path
-//            }
+            //            Glow {
+            //                anchors.fill: path
+            //                radius: 20
+            //                samples: 17
+            //                color: "red"
+            //                source: path
+            //            }
         }
 
         // Displays the RPM
         Text {
             id: textProgress
             text: progress.rpmValue
+            font.family: digitalFont.name
+            font.pixelSize: 30
+            color: progress.textColor
+
+            rightPadding: 10
 
             anchors.top: milesPerHourWidget.bottom
-//            anchors.verticalCenter: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-
-            color: progress.textColor
-            font.pointSize: progress.textSize
-            font.family: progress.textFontFamily
-
         }
 
         Text{
             id: rpmLabel
             text: "RPM"
+            font.family: digitalFont.name
+            font.pixelSize: 30
+            color: progress.textRPMColor
 
             anchors.left: textProgress.right
             anchors.bottom: textProgress.bottom

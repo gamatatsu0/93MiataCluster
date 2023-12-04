@@ -26,6 +26,12 @@ ApplicationWindow {
         id: bridge
     }
 
+
+        FontLoader { id: digitalFont; source: "./ui/assets/fonts/DS-DIGII.TTF" }
+
+        Text { text: "Fancy font"; font: digitalFont.font }
+
+
     Timer{
         interval: 500; running:true; repeat:true
         onTriggered: bridge.setGauges("s");
@@ -49,8 +55,8 @@ ApplicationWindow {
 
         RoundProgress{
             id:centerGauge
-            rpmValue:"0"// Pass value for RPM Here
-            speedValue:"0" // Pass value for the crrent speed
+            rpmValue:"69"// Pass value for RPM Here
+            speedValue:"69" // Pass value for the crrent speed
             kmhOrMPH:"MPH" // TODO
             celOrFarheit:"C" // TODO
         }

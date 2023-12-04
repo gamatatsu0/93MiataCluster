@@ -25,17 +25,18 @@ Item {
 //    Big Circle
     property color bgColor: "transparent"
     property color bgStrokeColor: "#7e7e7e"
-    property int strokeBgWidth: 20
+    property int strokeBgWidth: 10
 
 //    Progress Circle
     property color progressColor: "blue"
     property color lessColor: "blue"
-    property int progressWidth: 20
+    property int progressWidth: 10
 
 //    Text
     property string textFontFamily: "Segoe UI"
-    property int textSize: 20
+    property int textSize: 50
     property color textColor: "#7c7c7c"
+    FontLoader { id: digitalFont; source: "../../ui/assets/fonts/DS-DIGII.TTF" }
 
     Shape{
         id:shape
@@ -81,26 +82,31 @@ Item {
         Text {
             id: textProgress
 
+            text: "5000"
+            font.family: digitalFont.name
+            font.pixelSize: progress.textSize
+            color: progress.textColor
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
-            color: progress.textColor
-            text: "5000"
-            font.pointSize: progress.textSize
-            font.family: progress.textFontFamily
+
 
         }
 // Oil pressure text (PSI)
         Text {
             id: oilPreaaure
-            text: progress.oilPresureValueText  + "PSI"
+            text: progress.oilPresureValueText  + " PSI"
+            font.family: digitalFont.name
+            font.pixelSize:  progress.textSize-10
+            color: progress.textColor
 
-            anchors.verticalCenter: parent.verticalCenter
             x: 40
             width: 53
             height: 32
-            color: progress.textColor
-            font.pointSize: progress.textSize
-            font.family: progress.textFontFamily
+
+            anchors.verticalCenter: parent.verticalCenter
+
+
 
         }
 // Collent Temp
@@ -108,12 +114,17 @@ Item {
             id: coolantTemp
 
             text: progress.coolentTempValueText + " F"
+            font.family: digitalFont.name
+            font.pixelSize:  progress.textSize-10
+            color: progress.textColor
+
+            x:  300
+            width: 53
+            height: 32
+
 
             anchors.verticalCenter: parent.verticalCenter
-            x:  300
-            color: progress.textColor
-            font.pointSize: progress.textSize
-            font.family: progress.textFontFamily
+
 
         }
         ShapePath{

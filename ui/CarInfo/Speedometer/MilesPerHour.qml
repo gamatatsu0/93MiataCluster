@@ -11,9 +11,10 @@ Item {
     property string mphOrKm: "MPH"
 //    Text
     property string text: "%"
-    property string textFontFamily: "Segoe UI"
+    property string textFontFamily: "Orbitron"
     property int textSize: 50
     property color textColor: "#7c7c7c"
+    FontLoader { id: digitalFont; source: "../../../ui/assets/fonts/DS-DIGII.TTF" }
 
 
 //    Column{
@@ -29,8 +30,8 @@ Item {
             anchors.verticalCenter: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             color: milesperhour.textColor
-            font.pointSize: milesperhour.textSize
-            font.family: milesperhour.textFontFamily
+            font.family: digitalFont.name
+            font.pixelSize: milesperhour.textSize
 
         }
 
@@ -42,8 +43,8 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             color: milesperhour.textColor
-            font.pointSize: milesperhour.textSize
-            font.family: milesperhour.textFontFamily
+            font.family: digitalFont.name
+            font.pixelSize: 150
 
 //        }
 
