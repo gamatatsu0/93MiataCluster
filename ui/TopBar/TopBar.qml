@@ -16,7 +16,7 @@ Rectangle {
     property bool leftTurnSignal: false
     property bool rightTurnSignal: false
     property bool popUp: false
-    property bool brights: false
+    property bool brightBeam: false
     property bool runningLights: false
     property bool hazardLights: false
 
@@ -83,7 +83,7 @@ Rectangle {
         //          brights
         Image {
             id: brights
-            source: brights ? "../../ui/assets/cluster images/brights.png" : "../../ui/assets/cluster images/lightsOff.png"
+            source: brightBeam ? "../../ui/assets/cluster images/lightsOn.png" : "../../ui/assets/cluster images/lightsOff.png"
         }
         //        hazardLights
         Image {
