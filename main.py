@@ -10,6 +10,7 @@ from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine, QmlElement
 from PySide6.QtQuickControls2 import QQuickStyle
 
+
 from source.gpsModule.gpsModule import gpsModule
 from source.arduino.ArduinoInput import ArduinoModule
 from source.helpers.Milage import FuelEfficiency

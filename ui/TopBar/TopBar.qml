@@ -1,16 +1,17 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-Rectangle{
+
+Rectangle {
     id: topBar
-    anchors{
-        top:parent.top
+    anchors {
+        top: parent.top
     }
 
-    x: (parent.width /2) - (topBar.width /2)
+    x: (parent.width / 2) - (topBar.width / 2)
     radius: 15
     color: "black"
-    height: parent.height /12
-    width: parent.width /2
+    height: parent.height / 12
+    width: parent.width / 2
 
     property bool leftTurnSignal: false
     property bool rightTurnSignal: false
@@ -27,43 +28,47 @@ Rectangle{
         x: 0
         y: 0
         height: 100
-        anchors{
+        anchors {
             left: parent.left
         }
 
         //        turnLeft
         Image {
             id: leftArrow
-            source:leftTurnSignal? "../../ui/assets/cluster images/blueArrowLeft.png" : "../../ui/assets/cluster images/grayArrowLeft.png"
+            source: leftTurnSignal ? "../../ui/assets/cluster images/blueArrowLeft.png" : "../../ui/assets/cluster images/grayArrowLeft.png"
         }
 
         //        popUp
         Image {
             id: pupUp
-            source:popUp? "../../ui/assets/cluster images/popUpOn.png" : "../../ui/assets/cluster images/popUpOff.png"
+            source: popUp ? "../../ui/assets/cluster images/popUpOn.png" : "../../ui/assets/cluster images/popUpOff.png"
         }
-
 
         //        lights
         Image {
             id: lights
-            source:runningLights? "../../ui/assets/cluster images/lightsOn.png" : "../../ui/assets/cluster images/lightsOff.png"
+            source: runningLights ? "../../ui/assets/cluster images/lightsOn.png" : "../../ui/assets/cluster images/lightsOff.png"
         }
     }
 
     // Clock
-    Item{
+    Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        Timer{
-            interval: 500; running:true; repeat:true
-            onTriggered: time.text = new Date().toLocaleTimeString(Qt.locale("de_DE"));
+        Timer {
+            interval: 500
+            running: true
+            repeat: true
+            onTriggered: time.text = new Date().toLocaleTimeString(
+                             Qt.locale("de_DE"))
         }
-        Text{id:time
+        Text {
+            id: time
             color: "white"
             font.pointSize: 20
             font.family: "Segoe UI"
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
     Row {
@@ -72,22 +77,23 @@ Rectangle{
         y: 0
 
         height: 100
-        anchors{
-            right: parent.right}
+        anchors {
+            right: parent.right
+        }
         //          brights
         Image {
             id: brights
-            source:brights ? "../../ui/assets/cluster images/brights.png" : "../../ui/assets/cluster images/lightsOff.png"
+            source: brights ? "../../ui/assets/cluster images/brights.png" : "../../ui/assets/cluster images/lightsOff.png"
         }
         //        hazardLights
         Image {
             id: hazards
-            source:hazardLights? "../../ui/assets/cluster images/hazardOn.png" : "../../ui/assets/cluster images/hazardOff.png"
+            source: hazardLights ? "../../ui/assets/cluster images/hazardOn.png" : "../../ui/assets/cluster images/hazardOff.png"
         }
         //        turnRight
         Image {
             id: rightArrow
-            source:rightTurnSignal? "../../ui/assets/cluster images/blueArrowRight.png" : "../../ui/assets/cluster images/grayArrowRight.png"
+            source: rightTurnSignal ? "../../ui/assets/cluster images/blueArrowRight.png" : "../../ui/assets/cluster images/grayArrowRight.png"
         }
     }
 }
