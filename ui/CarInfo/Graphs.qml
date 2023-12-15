@@ -37,6 +37,37 @@ Rectangle {
     height: parent.height * 1 / 3
     color: mainColorBlack
 
+    // Graph Container
+    Rectangle {
+        id: graphHolder
+        height: parent.height / 2
+        width: parent.width
+
+        color: "transparent"
+
+        anchors.top: parent.top
+    }
+
+    // Warning Light popup container
+    Rectangle {
+        id: otherHolder
+        height: parent.height / 2
+        width: parent.width
+        color: "transparent"
+
+        anchors.bottom: parent.bottom
+
+        Rectangle {
+            id: warningLight
+
+            height: parent.height / 2
+            width: parent.width / 2
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
     // ChartView {
     //     width: 400
     //     height: 300

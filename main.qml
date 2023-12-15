@@ -20,6 +20,7 @@ ApplicationWindow {
     Material.theme: Material.Dark
     Material.accent: Material.Red
 
+    // color: "black"
     Bridge {
         id: bridge
     }

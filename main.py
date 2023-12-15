@@ -31,6 +31,7 @@ class Bridge(QObject):
 #        self.gpsConnection = gpsModule.start_GPS_connection("/dev/ttyACM0")
         self.arduinoConnection = ArduinoModule().start_arduino_connection()
         self.fuelEffient = FuelEfficiency()
+        self.listOfWarnings = []
 
     @Slot(str, result=str)
     def setGauges(self, s):
@@ -424,6 +425,20 @@ class Bridge(QObject):
         # self.setGauges("s")
         return True
 
+    # List of warnings
+    @Slot(str, result=str)
+    def setListOfWarnings(self, s):
+        # self.setGauges("s")
+        # print("SSS")
+        """
+            """
+        try:
+            if(len(self.listOfWarnings) != 0):
+                return self.listOfWarnings
+            else:
+                pass
+        except RuntimeError:
+            pass
 # ============== For stuff that needs to be calculated ==============
     @Slot(str, result=int)
     def setAmbientTemperature(self, s):
