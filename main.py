@@ -425,7 +425,7 @@ class Bridge(QObject):
         # self.setGauges("s")
         return True
 
-    # List of warnings
+
     @Slot(str, result=str)
     def setListOfWarnings(self, s):
         # self.setGauges("s")

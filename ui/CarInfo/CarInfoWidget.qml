@@ -49,22 +49,26 @@ FontLoader {
             left:parent.left
             bottom:parent.bottom
         }
+
         width: parent.width *1/4
-        height:parent.height * 1/2
+        height:parent.height * 1/3
         color:"transparent"
+        anchors.leftMargin: 5;
+        // anchors.margins: 20;        
+          
         Column{
             Text{
                 text: "AVG Speed"
                 color:"red"
                 font.family: digitalFont.name
-                font.pixelSize: 25
+                font.pixelSize: 30
                 }
 
             Text{
                 text:carInfo.averageSpeed + " M/H"
                 color:"white"
                 font.family: digitalFont.name
-                font.pixelSize: 20
+                font.pixelSize: 25
                 }
 
         }
@@ -77,21 +81,24 @@ FontLoader {
             bottom:avgSpeed.top
         }
         width: parent.width *1/4
-        height:parent.height * 1/4
+        height:parent.height * 1/3
         color:"transparent"
+        anchors.leftMargin: 5;
+        // anchors.margins: -20;
+
         Column{
             Text{
                 text:"AVG MPG"
                 color:"red"
                 font.family: digitalFont.name
-                font.pixelSize: 25
+                font.pixelSize: 30
                 }
 
             Text{
                 text: carInfo.averageMPG + " M/G"
                 color:"white"
                 font.family: digitalFont.name
-                font.pixelSize: 20
+                font.pixelSize: 25
                 }
 
         }
@@ -105,14 +112,17 @@ FontLoader {
             bottom:avgMPG.top
         }
         width: parent.width *1/4
-        height:parent.height * 1/4
+        height:parent.height * 1/3
         color:"transparent"
+        anchors.leftMargin: 5;
+        // anchors.margins: -20;
+
         Column{
             Text{
                 text:"Range"
                 color:"red"
                 font.family: digitalFont.name
-                font.pixelSize: 25
+                font.pixelSize: 30
                 }
 
             Text{
@@ -123,7 +133,7 @@ FontLoader {
                 text: get_avg_range(carInfo.fuelRange) + " Miles"
                 color:"white"
                 font.family: digitalFont.name
-                font.pixelSize: 20
+                font.pixelSize: 25
                 }
         }
     }
@@ -157,9 +167,11 @@ FontLoader {
             anchors{
                 right:parent.right
                 bottom: parent.bottom
+                rightMargin: 15
             }
             width: parent.width *1/3
             height:parent.height *1/8
+
             color:"transparent"
 
             Text{
@@ -170,7 +182,10 @@ FontLoader {
             Text{
                 id:fuelTextValue
                 text: "    "+carInfo.fuelLevel + "%"
-                color:"white"}
+                color:"white"
+                font.family: digitalFont.name
+                font.pixelSize: 20               
+            }
 
             ProgressBar {
                 anchors{
@@ -198,7 +213,11 @@ FontLoader {
             Text{
                 id:batteryText
                 text: "Battery"
-                color:"white"}
+                color:"white"
+                font.family: digitalFont.name
+                font.pixelSize: 20
+            }
+
             ProgressBar {
                 anchors{
                     right: parent.right
@@ -211,7 +230,7 @@ FontLoader {
         }
     }
 
-    //        Rectangle to hold car Image
+    //  Rectangle to hold car Image
     Rectangle{
         id: imageHolder
         anchors{
