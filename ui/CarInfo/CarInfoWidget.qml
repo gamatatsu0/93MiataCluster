@@ -6,6 +6,10 @@ import QtQuick.Controls 2.12
 Rectangle {
     id: carInfo
 
+FontLoader {
+    id: digitalFont
+    source: "../../ui/assets/fonts/DS-DIGII.TTF"
+}
     // Temperature properties
     // Temperature properties
     property string engineTemperature : "0"
@@ -50,12 +54,18 @@ Rectangle {
         color:"transparent"
         Column{
             Text{
-                text: "Average Speed"
-                color:"white"}
+                text: "AVG Speed"
+                color:"red"
+                font.family: digitalFont.name
+                font.pixelSize: 25
+                }
 
             Text{
                 text:carInfo.averageSpeed + " M/H"
-                color:"white"}
+                color:"white"
+                font.family: digitalFont.name
+                font.pixelSize: 20
+                }
 
         }
     }
@@ -72,11 +82,17 @@ Rectangle {
         Column{
             Text{
                 text:"AVG MPG"
-                color:"white"}
+                color:"red"
+                font.family: digitalFont.name
+                font.pixelSize: 25
+                }
 
             Text{
                 text: carInfo.averageMPG + " M/G"
-                color:"white"}
+                color:"white"
+                font.family: digitalFont.name
+                font.pixelSize: 20
+                }
 
         }
     }
@@ -94,7 +110,10 @@ Rectangle {
         Column{
             Text{
                 text:"Range"
-                color:"white"}
+                color:"red"
+                font.family: digitalFont.name
+                font.pixelSize: 25
+                }
 
             Text{
                 function get_avg_range(gas){
@@ -102,7 +121,10 @@ Rectangle {
                     return gallons_left
                 }
                 text: get_avg_range(carInfo.fuelRange) + " Miles"
-                color:"white"}
+                color:"white"
+                font.family: digitalFont.name
+                font.pixelSize: 20
+                }
         }
     }
 
