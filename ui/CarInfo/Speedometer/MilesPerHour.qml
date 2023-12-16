@@ -29,7 +29,7 @@ Item {
 
             anchors.verticalCenter: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "red"
+            color: "#E48716"
             font.family: digitalFont.name
             font.pixelSize: milesperhour.textSize
 

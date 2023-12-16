@@ -96,32 +96,6 @@ Item {
             //                source: path
             //            }
         }
-
-        // Displays the RPM
-        Text {
-            id: textProgress
-            text: progress.rpmValue
-            font.family: digitalFont.name
-            font.pixelSize: 40
-            color: progress.textColor
-
-            rightPadding: 10
-
-            anchors.top: milesPerHourWidget.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Text {
-            id: rpmLabel
-            text: "RPM"
-            font.family: digitalFont.name
-            font.pixelSize: 30
-            color: progress.textRPMColor
-
-            anchors.left: textProgress.right
-            anchors.bottom: textProgress.bottom
-        }
-
         // Displays the speed
         MilesPerHour {
             id: milesPerHourWidget
@@ -130,6 +104,39 @@ Item {
             currentMphValue: progress.speedValue
             mphOrKm: progress.kmhOrMPH
         }
+
+        // Displays the RPM
+        Rectangle{
+
+            anchors.top: milesPerHourWidget.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+        Text {
+            id: textProgress
+            text: progress.rpmValue
+            font.family: digitalFont.name
+            font.pixelSize: 50
+            color: progress.textColor
+
+            rightPadding: 10
+            anchors.right: parent.horizontalCenter
+
+
+        }
+
+        Text {
+            id: rpmLabel
+            text: "RPM"
+            font.family: digitalFont.name
+            font.pixelSize: 40
+            color: progress.textRPMColor
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: textProgress.right
+            anchors.bottom: textProgress.bottom
+        }
+        }
+
+
     }
 }
 
