@@ -1,15 +1,15 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-
+// import QtGraphicalEffects 1.15
 
 //Car info Widget
 Rectangle {
     id: carInfo
 
-FontLoader {
-    id: digitalFont
-    source: "../../ui/assets/fonts/DS-DIGII.TTF"
-}
+    FontLoader {
+        id: digitalFont
+        source: "../../ui/assets/fonts/DS-DIGII.TTF"
+    }
     // Temperature properties
     // Temperature properties
     property string engineTemperature : "0"
