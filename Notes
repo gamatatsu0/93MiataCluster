@@ -1,2 +1,7 @@
     If the GPS Module starts to act weird make sure to uninstall pyserial and serial and re-install them
-08/13/22 * The GPS receiver needs to be plugged in. if not there will be errors
+08/13/22 * The GPS receiver needs to be plugged in. if not there will be errors. 
+
+To adjust the values of the gaige you will need to use the function provided in ** add location here**, and enter the samples that you take for each gauge and the according
+voltage for each measurement. the function will return a function that you can copy and paste. as x you will provide the voltage that is
+actually given bu the gauge and as a reault you will get the value that the gauge represents when given that voltage. 
+you will need to this process for each one of the gaige that youra re using. 
