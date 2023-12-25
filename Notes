@@ -5,3 +5,19 @@ To adjust the values of the gaige you will need to use the function provided in 
 voltage for each measurement. the function will return a function that you can copy and paste. as x you will provide the voltage that is
 actually given bu the gauge and as a reault you will get the value that the gauge represents when given that voltage. 
 you will need to this process for each one of the gaige that youra re using. 
+
+for this project you will need a few component. 
+
+1. red, white and green wire
+2. dupont connectors and crimper
+3. assortment of different crimp ends
+4. arduino Mega
+5. raspberry pi (other small computers will do)
+6. buck converters 
+7. voltage dividers. 
+8. NA miata (pre obd2) cluster 
+9. soldering iron
+10.microscope or maginfying glass
+11. assortment of resistors
+12.portable monitor (compatible with #5)
+
